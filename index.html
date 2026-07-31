@@ -1167,6 +1167,10 @@
 
     <!-- JAVASCRIPT -->
     <script>
+        // Данные для отправки в Telegram
+        const TELEGRAM_BOT_TOKEN = '8685886364:AAHXMy8URcwttiJFB5-Szxk347FEGT37tOg';
+        const TELEGRAM_CHAT_ID = '715185366';
+
         // Мобильное меню
         const mobileToggle = document.getElementById('mobileToggle');
         const mainNav = document.getElementById('mainNav');
@@ -1191,13 +1195,43 @@
             }
         };
 
-        function handleSubmit(e) {
+        // Отправка формы в Telegram
+        async function handleSubmit(e) {
             e.preventDefault();
-            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
-            closeModal();
+            
+            const form = e.target;
+            const name = form.querySelector('input[type="text"]').value;
+            const phone = form.querySelector('input[type="tel"]').value;
+
+            const text = `⚡ *Новая заявка на сайте Разводка Про!*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: text,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+                    form.reset();
+                    closeModal();
+                } else {
+                    alert('Произошла ошибка при отправке. Пожалуйста, убедитесь, что вы запустили бота в Telegram.');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка сети. Проверьте подключение к интернету.');
+            }
         }
 
-        // Расценки выше среднего уровня
+        // Расценки
         const ROUGH_PRICE_PER_M2 = 2800; // Черновой монтаж за м²
         const SOCKET_PRICE = 350;        // Установка механизмов за шт.
         
@@ -1220,7 +1254,7 @@
             document.getElementById('totalPrice').innerText = total.toLocaleString('ru-RU') + ' ₽';
         }
 
-        // Калькулятор 2: Светодиодная лента (объединенный ползунок)
+        // Калькулятор 2: Светодиодная лента
         function updateLedPrice() {
             const ledLength = parseInt(document.getElementById('ledLengthRange').value);
             const solder = parseInt(document.getElementById('solderRange').value);
