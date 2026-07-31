@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <title>Разводка Про — Профессиональный электромонтаж в Самаре и Самарской области</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -25,20 +25,24 @@
             scroll-behavior: smooth;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-body);
             color: var(--text-main);
             line-height: 1.5;
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         /* ---------- ШАПКА ---------- */
@@ -50,6 +54,7 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             padding: 14px 0;
+            width: 100%;
         }
 
         .header-inner {
