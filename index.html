@@ -684,6 +684,33 @@
             text-align: left;
         }
 
+        /* ---------- ЗАКРЕПЛЕННАЯ КНОПКА (МИНИМАЛЬНЫЙ ВЫЕЗД) ---------- */
+        .fixed-callout-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: var(--accent);
+            color: var(--dark-blue);
+            border: none;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(245, 166, 35, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .fixed-callout-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(245, 166, 35, 0.5);
+            background: #f7b342;
+        }
+
         /* ---------- ЭТАПЫ РАБОТЫ ---------- */
         .steps {
             padding: 80px 0;
@@ -766,7 +793,7 @@
             height: 100%;
             background: rgba(11, 26, 46, 0.7);
             backdrop-filter: blur(6px);
-            z-index: 1000;
+            z-index: 2000;
             justify-content: center;
             align-items: center;
         }
@@ -793,7 +820,7 @@
             color: var(--text-muted);
         }
 
-        /* ЛАЙТБОКС С ЛИСТАНИЕМ */
+        /* ЛАЙТБОКС С ЛИСТАНИЕМ (Высокий z-index для устранения багов с плавающей кнопкой) */
         .image-modal {
             display: none;
             position: fixed;
@@ -802,7 +829,7 @@
             height: 100vh;
             background: rgba(5, 12, 22, 0.95);
             backdrop-filter: blur(8px);
-            z-index: 9999;
+            z-index: 10000;
             justify-content: center;
             align-items: center;
             padding: 20px;
@@ -863,7 +890,7 @@
             justify-content: center;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
-            z-index: 10000;
+            z-index: 10001;
         }
 
         .close-image-modal:hover {
@@ -888,7 +915,7 @@
             font-size: 20px;
             cursor: pointer;
             transition: background 0.2s, color 0.2s;
-            z-index: 10000;
+            z-index: 10001;
         }
 
         .lightbox-nav:hover {
@@ -1038,6 +1065,13 @@
             .portfolio-img {
                 height: 240px !important;
             }
+
+            .fixed-callout-btn {
+                bottom: 16px;
+                right: 16px;
+                padding: 12px 18px;
+                font-size: 13px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -1056,6 +1090,11 @@
     </style>
 </head>
 <body>
+
+    <!-- ЗАКРЕПЛЕННАЯ КНОПКА МИНИМАЛЬНОГО ВЫЕЗДА -->
+    <button class="fixed-callout-btn" onclick="openModal('minCallout')">
+        <i class="fas fa-wrench"></i> Минимальный выезд
+    </button>
 
     <!-- ШАПКА -->
     <header>
@@ -1355,13 +1394,15 @@
             <div class="calc-grid">
                 <div class="calc-form">
                     <div class="form-group">
-                        <label>Монтаж профиля и поклейка ленты: <span id="ledLengthValue">10</span> м.п.</label>
-                        <input type="range" min="0" max="100" value="10" class="range-slider" id="ledLengthRange" oninput="updateLedPrice()">
+                        <label>Монтаж профиля и поклейка ленты: <span id="ledLengthValue">10 м.п.</span></label>
+                        <!-- Длина ограничена 30 метрами -->
+                        <input type="range" min="0" max="30" value="10" class="range-slider" id="ledLengthRange" oninput="updateLedPrice()">
                     </div>
 
                     <div class="form-group">
-                        <label>Количество точек паек / соединений: <span id="solderValue">4</span> шт.</label>
-                        <input type="range" min="0" max="30" value="4" class="range-slider" id="solderRange" oninput="updateLedPrice()">
+                        <!-- Пайка минимально 1шт -->
+                        <label>Количество точек паек / соединений: <span id="solderValue">1</span> шт.</label>
+                        <input type="range" min="1" max="30" value="1" class="range-slider" id="solderRange" oninput="updateLedPrice()">
                     </div>
 
                     <div class="form-group">
@@ -1372,8 +1413,8 @@
 
                 <div class="calc-result">
                     <h3>Стоимость монтажа ленты</h3>
-                    <div class="calc-price" id="totalLedPrice">13 100 ₽</div>
-                    <div class="calc-notice">Сумма приблизительная и будет точно названа только после подсчета мастером фронта работ на объекте.</div>
+                    <div class="calc-price" id="totalLedPrice">11 500 ₽</div>
+                    <div class="calc-notice">Сумма приблизительная и будет точно названа только после подсчета мастером фронта работ на объекте. При объеме более 30 м расчет производится индивидуально.</div>
                     <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="openModal('ledCalc')"><i class="fas fa-paper-plane"></i> Заказать подсветку</button>
                 </div>
             </div>
@@ -1568,11 +1609,15 @@
                 modalSubtitle.innerText = `Параметры: Площадь ${area} м², розеток ${sockets} шт. Приблизительный итог: ${price} (точная стоимость после оценки мастера)`;
             } else if (sourceType === 'ledCalc') {
                 modalTitle.innerText = 'Заказ подсветки';
-                const ledLen = document.getElementById('ledLengthRange').value;
+                const ledLenRaw = parseInt(document.getElementById('ledLengthRange').value);
+                const ledLen = ledLenRaw >= 30 ? 'более 30' : ledLenRaw;
                 const solder = document.getElementById('solderRange').value;
                 const power = document.getElementById('powerRange').value;
                 const price = document.getElementById('totalLedPrice').innerText;
                 modalSubtitle.innerText = `Параметры: Лента ${ledLen} м.п., паек ${solder} шт., БП ${power} шт. Приблизительный итог: ${price} (точная стоимость после оценки мастера)`;
+            } else if (sourceType === 'minCallout') {
+                modalTitle.innerText = 'Минимальный выезд';
+                modalSubtitle.innerText = 'Мелкий ремонт: поменять лампочку, люстру, розетку или автомат. Фиксированная стоимость выезда — 3 000 ₽. Оставьте номер для связи:';
             } else {
                 modalTitle.innerText = 'Заказать консультацию';
                 modalSubtitle.innerText = customSubtitle || 'Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.';
@@ -1630,7 +1675,8 @@
                        `💰 *Приблизительная сумма:* ${price}\n` +
                        `ℹ️ _Сумма предварительная, уточняется мастером на объекте_`;
             } else if (currentSourceType === 'ledCalc') {
-                const ledLen = document.getElementById('ledLengthRange').value;
+                const ledLenRaw = parseInt(document.getElementById('ledLengthRange').value);
+                const ledLen = ledLenRaw >= 30 ? 'более 30' : ledLenRaw;
                 const solder = document.getElementById('solderRange').value;
                 const power = document.getElementById('powerRange').value;
                 const price = document.getElementById('totalLedPrice').innerText;
@@ -1643,6 +1689,11 @@
                        `⚡ *Блоков питания:* ${power} шт.\n` +
                        `💰 *Приблизительная сумма:* ${price}\n` +
                        `ℹ️ _Сумма предварительная, уточняется мастером на объекте_`;
+            } else if (currentSourceType === 'minCallout') {
+                text = `🛠️ *Заявка на Минимальный выезд (3000 ₽)*\n\n` +
+                       `👤 *Имя:* ${name}\n` +
+                       `📞 *Телефон:* ${fullPhone}\n` +
+                       `🔧 *Услуга:* Мелкий ремонт (лампочка / люстра / розетка / автомат)`;
             } else {
                 text = `⚡ *Новая заявка на сайте Разводка Про (Самара)*\n\n` +
                        `👤 *Имя:* ${name}\n` +
@@ -1700,7 +1751,12 @@
             const solder = parseInt(document.getElementById('solderRange').value);
             const power = parseInt(document.getElementById('powerRange').value);
 
-            document.getElementById('ledLengthValue').innerText = ledLength;
+            if (ledLength >= 30) {
+                document.getElementById('ledLengthValue').innerText = 'более 30 м (30+ m.п.)';
+            } else {
+                document.getElementById('ledLengthValue').innerText = ledLength + ' м.п.';
+            }
+
             document.getElementById('solderValue').innerText = solder;
             document.getElementById('powerValue').innerText = power;
 
