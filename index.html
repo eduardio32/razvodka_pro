@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Разводка Про — Профессиональный электромонтаж по ГОСТ и Световой дизайн</title>
+    <title>Разводка Про — Профессиональный электромонтаж в Самаре и Самарской области</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
@@ -181,6 +181,23 @@
             max-width: 500px;
             margin-bottom: 36px;
             line-height: 1.6;
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(11, 26, 46, 0.05);
+            color: var(--dark-blue);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .location-badge i {
+            color: var(--accent);
         }
 
         .hero-buttons {
@@ -723,6 +740,37 @@
             outline: none;
         }
 
+        /* Стили для поля телефона с полупрозрачным +7 */
+        .phone-input-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .phone-input-wrap .prefix {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(11, 26, 46, 0.4);
+            font-size: 15px;
+            font-weight: 500;
+            pointer-events: none;
+        }
+
+        .phone-input-wrap input {
+            width: 100%;
+            padding: 14px 14px 14px 42px;
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .phone-input-wrap input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
         /* ---------- АДАПТИВ ---------- */
         @media (max-width: 992px) {
             .hero-grid, .calc-grid {
@@ -806,13 +854,16 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-content">
+                <div class="location-badge">
+                    <i class="fas fa-map-marker-alt"></i> Самара и Самарская область
+                </div>
                 <h1>
                     Электромонтаж <br />
                     с <span class="highlight">продуманностью</span> <br />
                     на надежных компонентах
                 </h1>
                 <p>
-                    Безопасные инженерные сети и светодизайн для квартир и коттеджей. Проектирование, опрессовка гильзами ГМЛ, сборка силовых и слаботочных щитов БП, монтаж светодиодной подсветки.
+                    Безопасные инженерные сети и светодизайн для квартир и коттеджей в Самаре. Проектирование, опрессовка гильзами ГМЛ, сборка силовых и слаботочных щитов, монтаж светодиодной подсветки.
                 </p>
                 <div class="hero-buttons">
                     <button onclick="openModal()" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Заказать проект</button>
@@ -922,7 +973,7 @@
             <div class="features-header">
                 <div class="tag"><i class="fas fa-camera" style="margin-right: 6px;"></i> Портфолио</div>
                 <h2>Примеры наших выполненных работ</h2>
-                <p>Реальные объекты: сборка силовых и слаботочных щитов, черновой монтаж трасс и светодизайн</p>
+                <p>Реальные объекты в Самаре: сборка силовых и слаботочных щитов, черновой монтаж трасс и светодизайн</p>
             </div>
 
             <div class="portfolio-grid">
@@ -1114,7 +1165,7 @@
                 <div class="step-card">
                     <div class="step-num">01</div>
                     <h4>Замер и проект</h4>
-                    <p>Выезд на объект, составление технического задания, карты розеток, выключателей и зон подсветки.</p>
+                    <p>Выезд на объект в Самаре и области, составление технического задания и карты розеток.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-num">02</div>
@@ -1142,7 +1193,7 @@
                 <i class="fas fa-bolt" style="color: var(--accent);"></i> Разводка Про
             </div>
             <div>
-                © 2026 Разводка Про. Профессиональный электромонтаж.
+                © 2026 Разводка Про. Электромонтаж в Самаре и Самарской области.
             </div>
             <div class="footer-social">
                 <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
@@ -1158,8 +1209,15 @@
             <h3 style="font-size: 24px; margin-bottom: 10px;">Заказать консультацию</h3>
             <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.</p>
             <form onsubmit="handleSubmit(event)">
-                <input type="text" placeholder="Ваше имя" class="input-field" required>
-                <input type="tel" placeholder="Номер телефона" class="input-field" required>
+                <!-- Имя: только буквы (русские/английские) -->
+                <input type="text" placeholder="Ваше имя" class="input-field" id="clientName" required oninput="validateName(this)">
+                
+                <!-- Телефон: префикс +7 полупрозрачный, вводятся только цифры -->
+                <div class="phone-input-wrap">
+                    <span class="prefix">+7</span>
+                    <input type="tel" placeholder="(999) 000-00-00" id="clientPhone" maxlength="10" required oninput="validatePhone(this)">
+                </div>
+
                 <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Отправить заявку</button>
             </form>
         </div>
@@ -1195,15 +1253,32 @@
             }
         };
 
+        // Валидация имени: оставляем только буквы (русские и английские, с пробелами)
+        function validateName(input) {
+            input.value = input.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
+        }
+
+        // Валидация телефона: оставляем только цифры, максимум 10 символов после +7
+        function validatePhone(input) {
+            input.value = input.value.replace(/\D/g, '');
+        }
+
         // Отправка формы в Telegram
         async function handleSubmit(e) {
             e.preventDefault();
             
             const form = e.target;
-            const name = form.querySelector('input[type="text"]').value;
-            const phone = form.querySelector('input[type="tel"]').value;
+            const name = document.getElementById('clientName').value;
+            const phoneDigits = document.getElementById('clientPhone').value;
 
-            const text = `⚡ *Новая заявка на сайте Разводка Про!*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${phone}`;
+            // Проверяем, что телефон введен полностью (10 цифр)
+            if (phoneDigits.length < 10) {
+                alert('Пожалуйста, введите корректный номер телефона (10 цифр после +7).');
+                return;
+            }
+
+            const fullPhone = '+7 ' + phoneDigits;
+            const text = `⚡ *Новая заявка на сайте Разводка Про (Самара)*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${fullPhone}`;
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
