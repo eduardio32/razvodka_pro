@@ -613,7 +613,19 @@
             font-size: 48px;
             font-weight: 800;
             color: var(--accent);
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+        }
+
+        .calc-notice {
+            font-size: 13px;
+            color: #9cb1d6;
+            line-height: 1.4;
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent);
+            text-align: left;
         }
 
         /* ---------- ЭТАПЫ РАБОТЫ ---------- */
@@ -949,7 +961,7 @@
                 <div class="tech-item">
                     <i class="fas fa-compress-arrows-alt"></i>
                     <h4>Опрессовка гильзами ГМЛ</h4>
-                    <p>Жилы в распределительных коробках обжимаются гильзами ГМЛ многоточечной пресс-клещевой опрессовкой. Контакт без нагрева и окисления.</p>
+                    <p>Жилы в распаечных коробках обжимаются гильзами ГМЛ многоточечной пресс-клещевой опрессовкой. Контакт без нагрева и окисления.</p>
                 </div>
 
                 <div class="tech-item">
@@ -1107,9 +1119,9 @@
 
                 <div class="calc-result">
                     <h3>Предварительная стоимость</h3>
-                    <div class="calc-price" id="totalPrice">150 500 ₽</div>
-                    <p style="color: #8b9abf; margin-bottom: 24px; font-size: 14px;">Включает полный комплекс черновых работ и чистовую установку розеток/выключателей.</p>
-                    <button class="btn btn-primary" onclick="openModal('roughCalc')"><i class="fas fa-paper-plane"></i> Зафиксировать смету</button>
+                    <div class="calc-price" id="totalPrice">135 000 ₽</div>
+                    <div class="calc-notice">Сумма приблизительная и будет точно названа только после подсчета мастером фронта работ на объекте.</div>
+                    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="openModal('roughCalc')"><i class="fas fa-paper-plane"></i> Зафиксировать смету</button>
                 </div>
             </div>
         </div>
@@ -1145,8 +1157,8 @@
                 <div class="calc-result">
                     <h3>Стоимость монтажа ленты</h3>
                     <div class="calc-price" id="totalLedPrice">13 100 ₽</div>
-                    <p style="color: #8b9abf; margin-bottom: 24px; font-size: 14px;">Включает установку профиля с рассеивателем, поклейку ленты, пайку контактов и подключение блока.</p>
-                    <button class="btn btn-primary" onclick="openModal('ledCalc')"><i class="fas fa-paper-plane"></i> Заказать подсветку</button>
+                    <div class="calc-notice">Сумма приблизительная и будет точно названа только после подсчета мастером фронта работ на объекте.</div>
+                    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="openModal('ledCalc')"><i class="fas fa-paper-plane"></i> Заказать подсветку</button>
                 </div>
             </div>
         </div>
@@ -1251,14 +1263,14 @@
                 const area = document.getElementById('areaRange').value;
                 const sockets = document.getElementById('socketsRange').value;
                 const price = document.getElementById('totalPrice').innerText;
-                modalSubtitle.innerText = `Параметры: Площадь ${area} м², розеток ${sockets} шт. Итог: ${price}`;
+                modalSubtitle.innerText = `Параметры: Площадь ${area} м², розеток ${sockets} шт. Приблизительный итог: ${price} (точная стоимость после оценки мастера)`;
             } else if (sourceType === 'ledCalc') {
                 modalTitle.innerText = 'Заказ подсветки';
                 const ledLen = document.getElementById('ledLengthRange').value;
                 const solder = document.getElementById('solderRange').value;
                 const power = document.getElementById('powerRange').value;
                 const price = document.getElementById('totalLedPrice').innerText;
-                modalSubtitle.innerText = `Параметры: Лента ${ledLen} м.п., паек ${solder} шт., БП ${power} шт. Итог: ${price}`;
+                modalSubtitle.innerText = `Параметры: Лента ${ledLen} м.п., паек ${solder} шт., БП ${power} шт. Приблизительный итог: ${price} (точная стоимость после оценки мастера)`;
             } else {
                 modalTitle.innerText = 'Заказать консультацию';
                 modalSubtitle.innerText = customSubtitle || 'Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.';
@@ -1315,7 +1327,8 @@
                        `📞 *Телефон:* ${fullPhone}\n\n` +
                        `📐 *Площадь:* ${area} м²\n` +
                        `🔌 *Розетки/выкл:* ${sockets} шт.\n` +
-                       `💰 *Сумма:* ${price}`;
+                       `💰 *Приблизительная сумма:* ${price}\n` +
+                       `ℹ️ _Сумма предварительная, уточняется мастером на объекте_`;
             } else if (currentSourceType === 'ledCalc') {
                 const ledLen = document.getElementById('ledLengthRange').value;
                 const solder = document.getElementById('solderRange').value;
@@ -1328,7 +1341,8 @@
                        `📏 *Длина профиля/ленты:* ${ledLen} м.п.\n` +
                        `🔗 *Точек паек:* ${solder} шт.\n` +
                        `⚡ *Блоков питания:* ${power} шт.\n` +
-                       `💰 *Сумма:* ${price}`;
+                       `💰 *Приблизительная сумма:* ${price}\n` +
+                       `ℹ️ _Сумма предварительная, уточняется мастером на объекте_`;
             } else {
                 text = `⚡ *Новая заявка на сайте Разводка Про (Самара)*\n\n` +
                        `👤 *Имя:* ${name}\n` +
@@ -1362,7 +1376,7 @@
         }
 
         // Расценки
-        const ROUGH_PRICE_PER_M2 = 2800; // Черновой монтаж за м²
+        const ROUGH_PRICE_PER_M2 = 2400; // Черновой монтаж за м² (снижено до 2400)
         const SOCKET_PRICE = 350;        // Установка механизмов за шт.
         
         const LED_COMBO_PRICE = 1000;    // Монтаж профиля + поклейка ленты за м.п.
