@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Разводка Про — Профессиональный электромонтаж в Самаре и Самарской области</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -31,6 +31,8 @@
             color: var(--text-main);
             line-height: 1.5;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
 
         .container {
@@ -786,19 +788,21 @@
             color: var(--text-muted);
         }
 
+        /* ИСПРАВЛЕННЫЙ ЛАЙТБОКС (ФОТО) */
         .image-modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 12, 22, 0.92);
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 12, 22, 0.95);
             backdrop-filter: blur(8px);
-            z-index: 2000;
+            z-index: 9999;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .image-modal.open {
@@ -807,44 +811,57 @@
 
         .image-modal-content {
             position: relative;
-            max-width: 95vw;
-            max-height: 90vh;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
         }
 
         .image-modal-content img {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 75vh;
+            width: auto;
+            height: auto;
             object-fit: contain;
             border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .image-modal-caption {
             color: #fff;
             margin-top: 16px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             text-align: center;
+            max-width: 600px;
+            padding: 0 10px;
         }
 
         .close-image-modal {
             position: absolute;
-            top: -45px;
-            right: 0;
-            font-size: 32px;
+            top: 15px;
+            right: 15px;
+            font-size: 36px;
             color: #fff;
-            background: none;
+            background: rgba(0,0,0,0.4);
             border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: background 0.2s, color 0.2s;
+            z-index: 10000;
         }
 
         .close-image-modal:hover {
-            color: var(--accent);
+            background: var(--accent);
+            color: #0b1a2e;
         }
 
         .input-field {
@@ -1411,17 +1428,13 @@
         });
 
         // ПЕРЕХВАТ КНОПКИ «НАЗАД» (History API)
-        // Добавляем состояние в историю, чтобы при нажатии "Назад" сработало событие popstate
         history.pushState({ page: 'main' }, '', window.location.href);
 
         window.addEventListener('popstate', function(event) {
-            // Вызываем стандартное браузерное предупреждение «Вы хотите уйти?»
             const leave = confirm('Вы хотите покинуть сайт?');
             if (leave) {
-                // Если пользователь согласен уйти, возвращаем его на реальную предыдущую страницу в истории браузера
                 history.back();
             } else {
-                // Если отказался, удерживаем его на сайте и снова фиксируем состояние в истории
                 history.pushState({ page: 'main' }, '', window.location.href);
             }
         });
@@ -1437,12 +1450,14 @@
             const caption = document.getElementById('modalImgCaption');
 
             fullImg.src = img.src;
-            caption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 14px; color: #a5b4fc;">${description}</span>`;
+            caption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 13px; color: #a5b4fc;">${description}</span>`;
             modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeImageModal() {
             document.getElementById('imageModal').classList.remove('open');
+            document.body.style.overflow = '';
         }
 
         function openModal(sourceType = 'general', customSubtitle = '') {
@@ -1469,10 +1484,12 @@
             }
 
             document.getElementById('contactModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('contactModal').classList.remove('open');
+            document.body.style.overflow = '';
         }
 
         window.onclick = function(event) {
