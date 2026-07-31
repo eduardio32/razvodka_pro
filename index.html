@@ -65,6 +65,7 @@
             letter-spacing: -0.4px;
             color: var(--dark-blue);
             text-decoration: none;
+            z-index: 1001;
         }
 
         .logo i, .logo span {
@@ -127,13 +128,37 @@
             box-shadow: 0 8px 20px rgba(11, 26, 46, 0.2);
         }
 
+        /* Красивая кнопка мобильного меню (гамбургер) с анимацией */
         .mobile-toggle {
             display: none;
-            font-size: 24px;
-            background: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
             border: none;
-            color: var(--dark-blue);
             cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--dark-blue);
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Превращение гамбургера в крестик при классе .is-active */
+        .mobile-toggle.is-active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+        .mobile-toggle.is-active span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-toggle.is-active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
         }
 
         /* ---------- ГЕРОЙ ---------- */
@@ -516,7 +541,6 @@
             position: relative;
         }
 
-        /* Иконка лупы при наведении на картинку */
         .portfolio-img::after {
             content: '\f002';
             font-family: 'Font Awesome 6 Free';
@@ -763,7 +787,6 @@
             color: var(--text-muted);
         }
 
-        /* Модальное окно для увеличенного просмотра фото (Лайтбокс) */
         .image-modal {
             display: none;
             position: fixed;
@@ -840,7 +863,6 @@
             outline: none;
         }
 
-        /* Стили для поля телефона с полупрозрачным +7 */
         .phone-input-wrap {
             position: relative;
             margin-bottom: 16px;
@@ -871,13 +893,13 @@
             outline: none;
         }
 
-        /* ---------- АДАПТИВ ---------- */
+        /* ---------- АДАПТИВ (ПОРТФОЛИО В БОК И ВЫДВИЖНОЕ МЕНЮ) ---------- */
         @media (max-width: 992px) {
             .hero-grid, .calc-grid {
                 grid-template-columns: 1fr;
             }
 
-            .portfolio-grid, .tech-grid {
+            .tech-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -889,29 +911,60 @@
                 font-size: 40px;
             }
 
+            /* Показываем кнопку гамбургера */
             .mobile-toggle {
-                display: block;
+                display: flex;
             }
 
+            /* Современное выдвижное мобильное меню справа */
             .nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
+                position: fixed;
+                top: 0;
+                right: -100%; /* Скрыто за экраном */
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
                 background: #fff;
                 flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                justify-content: center;
+                align-items: center;
+                padding: 40px 20px;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+                transition: right 0.3s ease-in-out;
+                z-index: 1000;
+                gap: 24px;
             }
 
             .nav.open {
+                right: 0; /* Выдвигается на экран */
+            }
+
+            /* Портфолио в мобильной версии с листанием вбок */
+            .portfolio-grid {
                 display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 16px;
+                padding-bottom: 20px;
+                margin-top: 20px;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scroll-padding: 0 24px;
+            }
+
+            .portfolio-card {
+                flex: 0 0 85%;
+                max-width: 340px;
+                scroll-snap-align: start;
+            }
+
+            .portfolio-img {
+                height: 240px;
             }
         }
 
         @media (max-width: 600px) {
-            .grid-2col, .steps-grid, .portfolio-grid, .tech-grid {
+            .grid-2col, .steps-grid, .tech-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -934,7 +987,9 @@
                 <i class="fas fa-bolt"></i> Разводка <span>Про</span>
             </a>
             <button class="mobile-toggle" id="mobileToggle" aria-label="Открыть меню">
-                <i class="fas fa-bars"></i>
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
             <nav class="nav" id="mainNav">
                 <a href="#features">Принципы</a>
@@ -1077,7 +1132,6 @@
             </div>
 
             <div class="portfolio-grid">
-                <!-- Сборка слаботочных щитов с БП -->
                 <div class="portfolio-card">
                     <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_2026-07-31_21-50-16.jpg" alt="Монтаж блоков питания подсветки в шкафу">
@@ -1111,7 +1165,6 @@
                     </div>
                 </div>
 
-                <!-- Сборка силовых щитов -->
                 <div class="portfolio-card">
                     <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_2026-07-31_21-51-08.jpg" alt="Сборка щита КЕАЗ OptiBox">
@@ -1134,7 +1187,6 @@
                     </div>
                 </div>
 
-                <!-- Черновые трассы и коробки -->
                 <div class="portfolio-card">
                     <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="5375420213018433768.jpg" alt="Опрессовка гильзами ГМЛ">
@@ -1157,7 +1209,6 @@
                     </div>
                 </div>
 
-                <!-- Работы по ленте -->
                 <div class="portfolio-card">
                     <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="5434101835787606460.jpg" alt="Контурная подсветка ванной комнаты">
@@ -1340,11 +1391,20 @@
         const mobileToggle = document.getElementById('mobileToggle');
         const mainNav = document.getElementById('mainNav');
 
+        // Логика работы мобильного меню и анимации иконки
         mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('is-active');
             mainNav.classList.toggle('open');
         });
 
-        // Функция открытия увеличенного фото
+        // Автоматическое закрытие мобильного меню при клике на любую ссылку в нем
+        mainNav.querySelectorAll('a, button').forEach(item => {
+            item.addEventListener('click', () => {
+                mobileToggle.classList.remove('is-active');
+                mainNav.classList.remove('open');
+            });
+        });
+
         function openImageModal(element) {
             const img = element.querySelector('img');
             const card = element.closest('.portfolio-card');
@@ -1360,7 +1420,6 @@
             modal.classList.add('open');
         }
 
-        // Функция закрытия увеличенного фото
         function closeImageModal() {
             document.getElementById('imageModal').classList.remove('open');
         }
@@ -1490,7 +1549,6 @@
         const POWER_PRICE = 1000;        
 
         function updatePrice() {
-            // Исправлена синтаксическая ошибка со скобками
             const area = parseInt(document.getElementById('areaRange').value);
             const sockets = parseInt(document.getElementById('socketsRange').value);
 
