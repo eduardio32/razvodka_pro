@@ -128,7 +128,7 @@
             box-shadow: 0 8px 20px rgba(11, 26, 46, 0.2);
         }
 
-        /* Красивая кнопка мобильного меню (гамбургер) с анимацией */
+        /* Кнопка мобильного меню (гамбургер) */
         .mobile-toggle {
             display: none;
             flex-direction: column;
@@ -150,7 +150,6 @@
             transition: all 0.3s ease-in-out;
         }
 
-        /* Превращение гамбургера в крестик при классе .is-active */
         .mobile-toggle.is-active span:nth-child(1) {
             transform: translateY(9px) rotate(45deg);
         }
@@ -893,7 +892,7 @@
             outline: none;
         }
 
-        /* ---------- АДАПТИВ (ПОРТФОЛИО В БОК И ВЫДВИЖНОЕ МЕНЮ) ---------- */
+        /* ---------- АДАПТИВ (ПОРТФОЛИО В БОК И МЕНЮ) ---------- */
         @media (max-width: 992px) {
             .hero-grid, .calc-grid {
                 grid-template-columns: 1fr;
@@ -911,16 +910,14 @@
                 font-size: 40px;
             }
 
-            /* Показываем кнопку гамбургера */
             .mobile-toggle {
                 display: flex;
             }
 
-            /* Современное выдвижное мобильное меню справа */
             .nav {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Скрыто за экраном */
+                right: -100%;
                 width: 80%;
                 max-width: 320px;
                 height: 100vh;
@@ -936,30 +933,39 @@
             }
 
             .nav.open {
-                right: 0; /* Выдвигается на экран */
+                right: 0;
             }
 
-            /* Портфолио в мобильной версии с листанием вбок */
+            /* Мобильный скролл портфолио вбок */
+            .portfolio {
+                overflow: hidden;
+            }
+
             .portfolio-grid {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                gap: 16px;
-                padding-bottom: 20px;
-                margin-top: 20px;
-                flex-wrap: nowrap;
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                scroll-snap-type: x mandatory !important;
+                gap: 16px !important;
+                padding-bottom: 24px !important;
+                margin-top: 20px !important;
+                width: 100% !important;
                 -webkit-overflow-scrolling: touch;
-                scroll-padding: 0 24px;
+                scrollbar-width: none;
+            }
+
+            .portfolio-grid::-webkit-scrollbar {
+                display: none;
             }
 
             .portfolio-card {
-                flex: 0 0 85%;
-                max-width: 340px;
-                scroll-snap-align: start;
+                flex: 0 0 82% !important;
+                max-width: 320px !important;
+                scroll-snap-align: center !important;
             }
 
             .portfolio-img {
-                height: 240px;
+                height: 240px !important;
             }
         }
 
@@ -1391,18 +1397,33 @@
         const mobileToggle = document.getElementById('mobileToggle');
         const mainNav = document.getElementById('mainNav');
 
-        // Логика работы мобильного меню и анимации иконки
+        // Мобильное меню
         mobileToggle.addEventListener('click', () => {
             mobileToggle.classList.toggle('is-active');
             mainNav.classList.toggle('open');
         });
 
-        // Автоматическое закрытие мобильного меню при клике на любую ссылку в нем
         mainNav.querySelectorAll('a, button').forEach(item => {
             item.addEventListener('click', () => {
                 mobileToggle.classList.remove('is-active');
                 mainNav.classList.remove('open');
             });
+        });
+
+        // ПЕРЕХВАТ КНОПКИ «НАЗАД» (History API)
+        // Добавляем состояние в историю, чтобы при нажатии "Назад" сработало событие popstate
+        history.pushState({ page: 'main' }, '', window.location.href);
+
+        window.addEventListener('popstate', function(event) {
+            // Вызываем стандартное браузерное предупреждение «Вы хотите уйти?»
+            const leave = confirm('Вы хотите покинуть сайт?');
+            if (leave) {
+                // Если пользователь согласен уйти, возвращаем его на реальную предыдущую страницу в истории браузера
+                history.back();
+            } else {
+                // Если отказался, удерживаем его на сайте и снова фиксируем состояние в истории
+                history.pushState({ page: 'main' }, '', window.location.href);
+            }
         });
 
         function openImageModal(element) {
