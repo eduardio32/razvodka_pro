@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Разводка Про — Профессиональный электромонтаж в Самаре и Самарской области</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -788,7 +788,7 @@
             color: var(--text-muted);
         }
 
-        /* ИСПРАВЛЕННЫЙ ЛАЙТБОКС (ФОТО) */
+        /* ЛАЙТБОКС С ЛИСТАНИЕМ */
         .image-modal {
             display: none;
             position: fixed;
@@ -817,6 +817,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            touch-action: pan-x pan-y;
         }
 
         .image-modal-content img {
@@ -828,6 +829,7 @@
             border-radius: 12px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6);
             border: 1px solid rgba(255,255,255,0.1);
+            user-select: none;
         }
 
         .image-modal-caption {
@@ -844,7 +846,7 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            font-size: 36px;
+            font-size: 32px;
             color: #fff;
             background: rgba(0,0,0,0.4);
             border: none;
@@ -862,6 +864,53 @@
         .close-image-modal:hover {
             background: var(--accent);
             color: #0b1a2e;
+        }
+
+        /* Кнопки переключения фото в лайтбоксе */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            z-index: 10000;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--accent);
+            color: #0b1a2e;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            .lightbox-prev {
+                left: 10px;
+            }
+            .lightbox-next {
+                right: 10px;
+            }
         }
 
         .input-field {
@@ -1156,7 +1205,7 @@
 
             <div class="portfolio-grid">
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(0)">
                         <img src="photo_2026-07-31_21-50-16.jpg" alt="Монтаж блоков питания подсветки в шкафу">
                     </div>
                     <div class="portfolio-body">
@@ -1167,7 +1216,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(1)">
                         <img src="photo_2026-07-31_21-50-42.jpg" alt="Сборка панели блоков питания для подсветки">
                     </div>
                     <div class="portfolio-body">
@@ -1178,7 +1227,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(2)">
                         <img src="photo_7_2026-07-31_21-24-09.jpg" alt="Встраиваемый слаботочный щит с блоками питания">
                     </div>
                     <div class="portfolio-body">
@@ -1189,7 +1238,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(3)">
                         <img src="photo_2026-07-31_21-51-08.jpg" alt="Сборка щита КЕАЗ OptiBox">
                     </div>
                     <div class="portfolio-body">
@@ -1200,7 +1249,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(4)">
                         <img src="photo_2026-07-31_21-51-34.jpg" alt="Встраиваемый щит ABB UK600">
                     </div>
                     <div class="portfolio-body">
@@ -1211,7 +1260,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(5)">
                         <img src="5375420213018433768.jpg" alt="Опрессовка гильзами ГМЛ">
                     </div>
                     <div class="portfolio-body">
@@ -1222,7 +1271,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(6)">
                         <img src="5434101835787606455.jpg" alt="Прокладка кабельных трасс">
                     </div>
                     <div class="portfolio-body">
@@ -1233,7 +1282,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(7)">
                         <img src="5434101835787606460.jpg" alt="Контурная подсветка ванной комнаты">
                     </div>
                     <div class="portfolio-body">
@@ -1244,7 +1293,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img" onclick="openImageModal(this)">
+                    <div class="portfolio-img" onclick="openImageModal(8)">
                         <img src="photo_2_2026-07-31_21-25-29.jpg" alt="Подсветка ТВ-зоны">
                     </div>
                     <div class="portfolio-body">
@@ -1395,10 +1444,12 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО (ЛАЙТБОКС) -->
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО (ЛАЙТБОКС С ЛИСТАНИЕМ) -->
     <div class="image-modal" id="imageModal" onclick="closeImageModal()">
         <div class="image-modal-content" onclick="event.stopPropagation()">
             <button class="close-image-modal" onclick="closeImageModal()">&times;</button>
+            <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button class="lightbox-nav lightbox-next" onclick="changeImage(1)"><i class="fas fa-chevron-right"></i></button>
             <img id="modalFullImg" src="" alt="Увеличенное фото работы">
             <div class="image-modal-caption" id="modalImgCaption"></div>
         </div>
@@ -1410,6 +1461,20 @@
         const TELEGRAM_CHAT_ID = '715185366';
 
         let currentSourceType = 'general';
+        let currentImageIndex = 0;
+        let portfolioItems = [];
+
+        // Собираем данные всех картинок портфолио при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.portfolio-card');
+            portfolioItems = Array.from(cards).map(card => {
+                return {
+                    src: card.querySelector('.portfolio-img img').src,
+                    title: card.querySelector('h4').innerText,
+                    description: card.querySelector('p').innerText
+                };
+            });
+        });
 
         const mobileToggle = document.getElementById('mobileToggle');
         const mainNav = document.getElementById('mainNav');
@@ -1427,38 +1492,63 @@
             });
         });
 
-        // ПЕРЕХВАТ КНОПКИ «НАЗАД» (History API)
-        history.pushState({ page: 'main' }, '', window.location.href);
+        function openImageModal(index) {
+            currentImageIndex = index;
+            updateModalImage();
+            document.getElementById('imageModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
 
-        window.addEventListener('popstate', function(event) {
-            const leave = confirm('Вы хотите покинуть сайт?');
-            if (leave) {
-                history.back();
-            } else {
-                history.pushState({ page: 'main' }, '', window.location.href);
-            }
-        });
+        function updateModalImage() {
+            const item = portfolioItems[currentImageIndex];
+            if (!item) return;
 
-        function openImageModal(element) {
-            const img = element.querySelector('img');
-            const card = element.closest('.portfolio-card');
-            const title = card.querySelector('h4').innerText;
-            const description = card.querySelector('p').innerText;
-
-            const modal = document.getElementById('imageModal');
             const fullImg = document.getElementById('modalFullImg');
             const caption = document.getElementById('modalImgCaption');
 
-            fullImg.src = img.src;
-            caption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 13px; color: #a5b4fc;">${description}</span>`;
-            modal.classList.add('open');
-            document.body.style.overflow = 'hidden';
+            fullImg.src = item.src;
+            caption.innerHTML = `<strong>${item.title}</strong><br><span style="font-size: 13px; color: #a5b4fc;">${item.description}</span>`;
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = portfolioItems.length - 1;
+            } else if (currentImageIndex >= portfolioItems.length) {
+                currentImageIndex = 0;
+            }
+            updateModalImage();
         }
 
         function closeImageModal() {
             document.getElementById('imageModal').classList.remove('open');
             document.body.style.overflow = '';
         }
+
+        // Поддержка свайпов и стрелок клавиатуры для галереи
+        let touchStartX = 0;
+        const modalEl = document.getElementById('imageModal');
+        
+        modalEl.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        modalEl.addEventListener('touchend', e => {
+            let touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) {
+                changeImage(1); // свайп влево -> след фото
+            }
+            if (touchEndX > touchStartX + 50) {
+                changeImage(-1); // свайп вправо -> пред фото
+            }
+        }, {passive: true});
+
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('imageModal').classList.contains('open')) return;
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'Escape') closeImageModal();
+        });
 
         function openModal(sourceType = 'general', customSubtitle = '') {
             currentSourceType = sourceType;
