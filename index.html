@@ -512,6 +512,32 @@
             height: 300px;
             overflow: hidden;
             background: #101c2e;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Иконка лупы при наведении на картинку */
+        .portfolio-img::after {
+            content: '\f002';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 26, 46, 0.4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-img:hover::after {
+            opacity: 1;
         }
 
         .portfolio-img img {
@@ -700,7 +726,7 @@
             color: var(--accent);
         }
 
-        /* ---------- МОДАЛЬНОЕ ОКНО ---------- */
+        /* ---------- МОДАЛЬНЫЕ ОКНА ---------- */
         .modal {
             display: none;
             position: fixed;
@@ -735,6 +761,68 @@
             font-size: 22px;
             cursor: pointer;
             color: var(--text-muted);
+        }
+
+        /* Модальное окно для увеличенного просмотра фото (Лайтбокс) */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 12, 22, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .image-modal.open {
+            display: flex;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .image-modal-caption {
+            color: #fff;
+            margin-top: 16px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .close-image-modal {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            font-size: 32px;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-image-modal:hover {
+            color: var(--accent);
         }
 
         .input-field {
@@ -985,13 +1073,13 @@
             <div class="features-header">
                 <div class="tag"><i class="fas fa-camera" style="margin-right: 6px;"></i> Портфолио</div>
                 <h2>Примеры наших выполненных работ</h2>
-                <p>Реальные объекты в Самаре: сборка силовых и слаботочных щитов, черновой монтаж трасс и светодизайн</p>
+                <p>Реальные объекты в Самаре: сборка силовых и слаботочных щитов, черновой монтаж трасс и светодизайн. Нажмите на любое фото для увеличения.</p>
             </div>
 
             <div class="portfolio-grid">
                 <!-- Сборка слаботочных щитов с БП -->
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_2026-07-31_21-50-16.jpg" alt="Монтаж блоков питания подсветки в шкафу">
                     </div>
                     <div class="portfolio-body">
@@ -1002,7 +1090,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_2026-07-31_21-50-42.jpg" alt="Сборка панели блоков питания для подсветки">
                     </div>
                     <div class="portfolio-body">
@@ -1013,7 +1101,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_7_2026-07-31_21-24-09.jpg" alt="Встраиваемый слаботочный щит с блоками питания">
                     </div>
                     <div class="portfolio-body">
@@ -1025,7 +1113,7 @@
 
                 <!-- Сборка силовых щитов -->
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_2026-07-31_21-51-08.jpg" alt="Сборка щита КЕАЗ OptiBox">
                     </div>
                     <div class="portfolio-body">
@@ -1036,7 +1124,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_2026-07-31_21-51-34.jpg" alt="Встраиваемый щит ABB UK600">
                     </div>
                     <div class="portfolio-body">
@@ -1048,7 +1136,7 @@
 
                 <!-- Черновые трассы и коробки -->
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="5375420213018433768.jpg" alt="Опрессовка гильзами ГМЛ">
                     </div>
                     <div class="portfolio-body">
@@ -1059,7 +1147,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="5434101835787606455.jpg" alt="Прокладка кабельных трасс">
                     </div>
                     <div class="portfolio-body">
@@ -1071,7 +1159,7 @@
 
                 <!-- Работы по ленте -->
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="5434101835787606460.jpg" alt="Контурная подсветка ванной комнаты">
                     </div>
                     <div class="portfolio-body">
@@ -1082,7 +1170,7 @@
                 </div>
 
                 <div class="portfolio-card">
-                    <div class="portfolio-img">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
                         <img src="photo_2_2026-07-31_21-25-29.jpg" alt="Подсветка ТВ-зоны">
                     </div>
                     <div class="portfolio-body">
@@ -1214,17 +1302,15 @@
         </div>
     </footer>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ФОРМ ЗАЯВОК -->
     <div class="modal" id="contactModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <h3 id="modalTitle" style="font-size: 24px; margin-bottom: 10px;">Заказать консультацию</h3>
             <p id="modalSubtitle" style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.</p>
             <form onsubmit="handleSubmit(event)">
-                <!-- Имя: только буквы (русские/английские) -->
                 <input type="text" placeholder="Ваше имя" class="input-field" id="clientName" required oninput="validateName(this)">
                 
-                <!-- Телефон: префикс +7 полупрозрачный, вводятся только цифры -->
                 <div class="phone-input-wrap">
                     <span class="prefix">+7</span>
                     <input type="tel" placeholder="(999) 000-00-00" id="clientPhone" maxlength="10" required oninput="validatePhone(this)">
@@ -1232,6 +1318,15 @@
 
                 <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Отправить заявку</button>
             </form>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО (ЛАЙТБОКС) -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <div class="image-modal-content" onclick="event.stopPropagation()">
+            <button class="close-image-modal" onclick="closeImageModal()">&times;</button>
+            <img id="modalFullImg" src="" alt="Увеличенное фото работы">
+            <div class="image-modal-caption" id="modalImgCaption"></div>
         </div>
     </div>
 
@@ -1252,7 +1347,27 @@
             mainNav.classList.toggle('open');
         });
 
-        // Открытие модального окна с динамическими текстами
+        // Функции для работы с лайтбоксом увеличенных фото
+        function openImageModal(element) {
+            const img = element.querySelector('img');
+            const card = element.closest('.portfolio-card');
+            const title = card.querySelector('h4').innerText;
+            const description = card.querySelector('p').innerText;
+
+            const modal = document.getElementById('imageModal');
+            const fullImg = document.getElementById('modalFullImg');
+            const caption = document.getElementById('modalImgCaption');
+
+            fullImg.src = img.src;
+            caption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 14px; color: #a5b4fc;">${description}</span>`;
+            modal.classList.add('open');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.remove('open');
+        }
+
+        // Открытие модального окна заявки с динамическими текстами
         function openModal(sourceType = 'general', customSubtitle = '') {
             currentSourceType = sourceType;
             const modalTitle = document.getElementById('modalTitle');
@@ -1385,7 +1500,7 @@
 
         // Калькулятор 1: Черновой монтаж + Механизмы
         function updatePrice() {
-            const area = parseInt(document.getElementById('areaRange').value);
+            const area = parseInt(document.getElementById('areaRange').value;
             const sockets = parseInt(document.getElementById('socketsRange').value);
 
             document.getElementById('areaValue').innerText = area;
