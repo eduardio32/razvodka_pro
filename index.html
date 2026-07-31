@@ -843,7 +843,7 @@
                 <a href="#calculator">Калькулятор черновой</a>
                 <a href="#led-calculator">Калькулятор ленты</a>
                 <a href="#steps">Этапы</a>
-                <button class="btn-ghost" onclick="openModal()">
+                <button class="btn-ghost" onclick="openModal('general', 'Консультация с шапки')">
                     <i class="fas fa-phone-alt" style="margin-right: 8px;"></i>Связаться
                 </button>
             </nav>
@@ -866,7 +866,7 @@
                     Безопасные инженерные сети и светодизайн для квартир и коттеджей в Самаре. Проектирование, опрессовка гильзами ГМЛ, сборка силовых и слаботочных щитов, монтаж светодиодной подсветки.
                 </p>
                 <div class="hero-buttons">
-                    <button onclick="openModal()" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Заказать проект</button>
+                    <button onclick="openModal('general', 'Заказ проекта с главного экрана')" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Заказать проект</button>
                     <a href="#calculator" class="btn btn-outline"><i class="fas fa-calculator"></i> Рассчитать цену</a>
                 </div>
             </div>
@@ -1109,7 +1109,7 @@
                     <h3>Предварительная стоимость</h3>
                     <div class="calc-price" id="totalPrice">150 500 ₽</div>
                     <p style="color: #8b9abf; margin-bottom: 24px; font-size: 14px;">Включает полный комплекс черновых работ и чистовую установку розеток/выключателей.</p>
-                    <button class="btn btn-primary" onclick="openModal()"><i class="fas fa-paper-plane"></i> Зафиксировать смету</button>
+                    <button class="btn btn-primary" onclick="openModal('roughCalc')"><i class="fas fa-paper-plane"></i> Зафиксировать смету</button>
                 </div>
             </div>
         </div>
@@ -1146,7 +1146,7 @@
                     <h3>Стоимость монтажа ленты</h3>
                     <div class="calc-price" id="totalLedPrice">13 100 ₽</div>
                     <p style="color: #8b9abf; margin-bottom: 24px; font-size: 14px;">Включает установку профиля с рассеивателем, поклейку ленты, пайку контактов и подключение блока.</p>
-                    <button class="btn btn-primary" onclick="openModal()"><i class="fas fa-paper-plane"></i> Заказать подсветку</button>
+                    <button class="btn btn-primary" onclick="openModal('ledCalc')"><i class="fas fa-paper-plane"></i> Заказать подсветку</button>
                 </div>
             </div>
         </div>
@@ -1206,8 +1206,8 @@
     <div class="modal" id="contactModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 style="font-size: 24px; margin-bottom: 10px;">Заказать консультацию</h3>
-            <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.</p>
+            <h3 id="modalTitle" style="font-size: 24px; margin-bottom: 10px;">Заказать консультацию</h3>
+            <p id="modalSubtitle" style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.</p>
             <form onsubmit="handleSubmit(event)">
                 <!-- Имя: только буквы (русские/английские) -->
                 <input type="text" placeholder="Ваше имя" class="input-field" id="clientName" required oninput="validateName(this)">
@@ -1229,6 +1229,9 @@
         const TELEGRAM_BOT_TOKEN = '8685886364:AAHXMy8URcwttiJFB5-Szxk347FEGT37tOg';
         const TELEGRAM_CHAT_ID = '715185366';
 
+        // Переменная для отслеживания источника заявки
+        let currentSourceType = 'general';
+
         // Мобильное меню
         const mobileToggle = document.getElementById('mobileToggle');
         const mainNav = document.getElementById('mainNav');
@@ -1237,8 +1240,30 @@
             mainNav.classList.toggle('open');
         });
 
-        // Модальное окно
-        function openModal() {
+        // Открытие модального окна с динамическими текстами
+        function openModal(sourceType = 'general', customSubtitle = '') {
+            currentSourceType = sourceType;
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
+
+            if (sourceType === 'roughCalc') {
+                modalTitle.innerText = 'Зафиксировать смету';
+                const area = document.getElementById('areaRange').value;
+                const sockets = document.getElementById('socketsRange').value;
+                const price = document.getElementById('totalPrice').innerText;
+                modalSubtitle.innerText = `Параметры: Площадь ${area} м², розеток ${sockets} шт. Итог: ${price}`;
+            } else if (sourceType === 'ledCalc') {
+                modalTitle.innerText = 'Заказ подсветки';
+                const ledLen = document.getElementById('ledLengthRange').value;
+                const solder = document.getElementById('solderRange').value;
+                const power = document.getElementById('powerRange').value;
+                const price = document.getElementById('totalLedPrice').innerText;
+                modalSubtitle.innerText = `Параметры: Лента ${ledLen} м.п., паек ${solder} шт., БП ${power} шт. Итог: ${price}`;
+            } else {
+                modalTitle.innerText = 'Заказать консультацию';
+                modalSubtitle.innerText = customSubtitle || 'Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.';
+            }
+
             document.getElementById('contactModal').classList.add('open');
         }
 
@@ -1263,7 +1288,7 @@
             input.value = input.value.replace(/\D/g, '');
         }
 
-        // Отправка формы в Telegram
+        // Отправка формы в Telegram с учетом выбранного калькулятора
         async function handleSubmit(e) {
             e.preventDefault();
             
@@ -1278,7 +1303,37 @@
             }
 
             const fullPhone = '+7 ' + phoneDigits;
-            const text = `⚡ *Новая заявка на сайте Разводка Про (Самара)*\n\n👤 *Имя:* ${name}\n📞 *Телефон:* ${fullPhone}`;
+            let text = '';
+
+            if (currentSourceType === 'roughCalc') {
+                const area = document.getElementById('areaRange').value;
+                const sockets = document.getElementById('socketsRange').value;
+                const price = document.getElementById('totalPrice').innerText;
+
+                text = `📋 *Зафиксирована смета (Черновой + Механизмы)*\n\n` +
+                       `👤 *Имя:* ${name}\n` +
+                       `📞 *Телефон:* ${fullPhone}\n\n` +
+                       `📐 *Площадь:* ${area} м²\n` +
+                       `🔌 *Розетки/выкл:* ${sockets} шт.\n` +
+                       `💰 *Сумма:* ${price}`;
+            } else if (currentSourceType === 'ledCalc') {
+                const ledLen = document.getElementById('ledLengthRange').value;
+                const solder = document.getElementById('solderRange').value;
+                const power = document.getElementById('powerRange').value;
+                const price = document.getElementById('totalLedPrice').innerText;
+
+                text = `💡 *Заявка на монтаж светодиодной ленты*\n\n` +
+                       `👤 *Имя:* ${name}\n` +
+                       `📞 *Телефон:* ${fullPhone}\n\n` +
+                       `📏 *Длина профиля/ленты:* ${ledLen} м.п.\n` +
+                       `🔗 *Точек паек:* ${solder} шт.\n` +
+                       `⚡ *Блоков питания:* ${power} шт.\n` +
+                       `💰 *Сумма:* ${price}`;
+            } else {
+                text = `⚡ *Новая заявка на сайте Разводка Про (Самара)*\n\n` +
+                       `👤 *Имя:* ${name}\n` +
+                       `📞 *Телефон:* ${fullPhone}`;
+            }
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
