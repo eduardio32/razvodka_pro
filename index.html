@@ -1,257 +1,1528 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Профессиональный электромонтаж | Панели, проводка, механизмы</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Разводка Про — Профессиональный электромонтаж в Самаре и Самарской области</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         :root {
-            --primary: #3b82f6;
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-body: #f5f7fb;
+            --dark-blue: #0b1a2e;
+            --blue-hover: #1e2a44;
+            --accent: #f5a623;
+            --accent-light: rgba(245, 166, 35, 0.12);
+            --text-main: #0b1a2e;
+            --text-muted: #4a5675;
+            --card-border: #edf1f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-body);
             color: var(--text-main);
             line-height: 1.5;
-        }
-
-        header {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            text-align: center;
-            border-bottom: 1px solid #334155;
-        }
-
-        header h1 {
-            margin: 0 0 0.5rem 0;
-            color: var(--primary);
-        }
-
-        header p {
-            margin: 0;
-            color: var(--text-muted);
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 24px;
         }
 
-        h2 {
+        /* ---------- ШАПКА ---------- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 14px 0;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -0.4px;
+            color: var(--dark-blue);
+            text-decoration: none;
+        }
+
+        .logo i, .logo span {
+            color: var(--accent);
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #1e2a44;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav a:not(.btn-ghost)::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.25s;
+        }
+
+        .nav a:not(.btn-ghost):hover::after {
+            width: 100%;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        .nav .btn-ghost {
+            background: var(--dark-blue);
+            color: #fff !important;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.25s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav .btn-ghost:hover {
+            background: var(--blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(11, 26, 46, 0.2);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: var(--dark-blue);
+            cursor: pointer;
+        }
+
+        /* ---------- ГЕРОЙ ---------- */
+        .hero {
+            padding: 80px 0 70px;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 .highlight {
+            color: var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-content h1 .highlight::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 4px;
+            width: 100%;
+            height: 10px;
+            background: rgba(245, 166, 35, 0.25);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(11, 26, 46, 0.05);
+            color: var(--dark-blue);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .location-badge i {
+            color: var(--accent);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 34px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--dark-blue);
+            color: #fff;
+            box-shadow: 0 12px 32px rgba(11, 26, 46, 0.20);
+        }
+
+        .btn-primary:hover {
+            background: var(--blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(11, 26, 46, 0.28);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--dark-blue);
+            border: 2px solid #d0d7e6;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(245, 166, 35, 0.04);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image .illustration {
+            width: 100%;
+            max-width: 460px;
+            height: 460px;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(11, 26, 46, 0.15);
+            border: 2px solid #fff;
+        }
+
+        .hero-image .illustration img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-image .badge {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            background: var(--dark-blue);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .hero-image .badge i {
+            font-size: 18px;
+            color: var(--accent);
+        }
+
+        /* ---------- БРЕНДЫ ---------- */
+        .brands-section {
+            padding: 30px 0;
+            background: #fff;
+            border-top: 1px solid var(--card-border);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .brands-title {
             text-align: center;
-            margin-bottom: 2rem;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
         }
 
-        /* Сетка портфолио */
+        .brands-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .brand-item {
+            font-size: 20px;
+            font-weight: 800;
+            color: #8b9abf;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ---------- ПРЕИМУЩЕСТВА ---------- */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 56px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--accent-light);
+            color: #b87c1a;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 6px 20px;
+            border-radius: 40px;
+            margin-bottom: 14px;
+        }
+
+        .features-header h2 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+            margin-bottom: 14px;
+        }
+
+        .features-header p {
+            font-size: 17px;
+            color: var(--text-muted);
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 36px 32px;
+            border-radius: 28px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card .icon {
+            width: 56px;
+            height: 56px;
+            background: var(--bg-body);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 18px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover .icon {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .badge-quality {
+            display: inline-block;
+            margin-top: 16px;
+            background: var(--dark-blue);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 16px;
+            border-radius: 30px;
+        }
+
+        /* ---------- ТЕХНОЛОГИИ ---------- */
+        .tech-section {
+            padding: 60px 0;
+            background: #fff;
+            border-radius: 32px;
+            margin: 40px 0;
+            border: 1px solid var(--card-border);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 36px;
+        }
+
+        .tech-item {
+            background: var(--bg-body);
+            padding: 28px;
+            border-radius: 20px;
+            text-align: left;
+        }
+
+        .tech-item i {
+            font-size: 28px;
+            color: var(--accent);
+            margin-bottom: 14px;
+        }
+
+        .tech-item h4 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .tech-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ---------- ПОРТФОЛИО ---------- */
+        .portfolio {
+            padding: 80px 0;
+        }
+
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
         }
 
         .portfolio-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
+            background: #fff;
+            border-radius: 24px;
             overflow: hidden;
-            border: 1px solid #334155;
-            transition: transform 0.3s ease;
+            border: 1px solid var(--card-border);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .portfolio-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
         .portfolio-img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             overflow: hidden;
             background: #101c2e;
-            cursor: zoom-in; /* Лупа при наведении */
+            cursor: pointer;
             position: relative;
+        }
+
+        /* Иконка лупы при наведении на картинку */
+        .portfolio-img::after {
+            content: '\f002';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 26, 46, 0.4);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-img:hover::after {
+            opacity: 1;
         }
 
         .portfolio-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
         }
 
-        .portfolio-img:hover img {
+        .portfolio-card:hover .portfolio-img img {
             transform: scale(1.05);
         }
 
-        .portfolio-content {
-            padding: 1.5rem;
+        .portfolio-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
-        .portfolio-content h4 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.25rem;
+        .portfolio-body h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
         }
 
-        .portfolio-content p {
-            margin: 0;
+        .portfolio-body p {
+            font-size: 14px;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            margin-bottom: 16px;
+            flex-grow: 1;
         }
 
-        /* Модальное окно (Лайтбокс) */
+        .portfolio-tag {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 4px 12px;
+            background: var(--bg-body);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        /* ---------- КАЛЬКУЛЯТОРЫ ---------- */
+        .calculator-section {
+            padding: 80px 0;
+            background: #fff;
+            border-radius: 40px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid var(--card-border);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .calc-form {
+            background: var(--bg-body);
+            padding: 32px;
+            border-radius: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .range-slider {
+            width: 100%;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+
+        .calc-result {
+            background: var(--dark-blue);
+            color: #fff;
+            padding: 40px;
+            border-radius: 32px;
+            text-align: center;
+        }
+
+        .calc-result h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #b0bedb;
+        }
+
+        .calc-price {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .calc-notice {
+            font-size: 13px;
+            color: #9cb1d6;
+            line-height: 1.4;
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border-left: 3px solid var(--accent);
+            text-align: left;
+        }
+
+        /* ---------- ЭТАПЫ РАБОТЫ ---------- */
+        .steps {
+            padding: 80px 0;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .step-card {
+            background: #fff;
+            padding: 28px;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+        }
+
+        .step-num {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .step-card h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .step-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ---------- ПОДВАЛ ---------- */
+        footer {
+            background: var(--dark-blue);
+            color: #8b9abf;
+            padding: 40px 0;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .footer-social a {
+            color: #8b9abf;
+            margin-left: 20px;
+            font-size: 20px;
+            transition: color 0.2s;
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+        }
+
+        /* ---------- МОДАЛЬНЫЕ ОКНА ---------- */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background: rgba(11, 26, 46, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            padding: 2rem;
-            box-sizing: border-box;
         }
 
         .modal.open {
             display: flex;
         }
 
-        .modal-content-wrap {
-            max-width: 90%;
-            max-height: 80vh;
-            text-align: center;
+        .modal-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 28px;
+            max-width: 480px;
+            width: 90%;
             position: relative;
         }
 
-        .modal img {
-            max-width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 4px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-        }
-
-        .modal-caption {
-            margin-top: 1rem;
-            color: #fff;
-            font-size: 1.1rem;
-        }
-
-        .modal-close {
+        .close-modal {
             position: absolute;
             top: 20px;
-            right: 30px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
+            right: 20px;
+            font-size: 22px;
             cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        /* Модальное окно для увеличенного просмотра фото (Лайтбокс) */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(5, 12, 22, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .image-modal.open {
+            display: flex;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .image-modal-caption {
+            color: #fff;
+            margin-top: 16px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .close-image-modal {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            font-size: 32px;
+            color: #fff;
             background: none;
             border: none;
+            cursor: pointer;
             transition: color 0.2s;
         }
 
-        .modal-close:hover {
-            color: var(--primary);
+        .close-image-modal:hover {
+            color: var(--accent);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        /* Стили для поля телефона с полупрозрачным +7 */
+        .phone-input-wrap {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .phone-input-wrap .prefix {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(11, 26, 46, 0.4);
+            font-size: 15px;
+            font-weight: 500;
+            pointer-events: none;
+        }
+
+        .phone-input-wrap input {
+            width: 100%;
+            padding: 14px 14px 14px 42px;
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .phone-input-wrap input:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 992px) {
+            .hero-grid, .calc-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid, .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+            .nav.open {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .grid-2col, .steps-grid, .portfolio-grid, .tech-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .calc-price {
+                font-size: 36px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- ШАПКА -->
     <header>
-        <h1>Электромонтажные работы под ключ</h1>
-        <p>Качественная сборка щитов, черновая электрика и установка механизмов</p>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <i class="fas fa-bolt"></i> Разводка <span>Про</span>
+            </a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Открыть меню">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="nav" id="mainNav">
+                <a href="#features">Принципы</a>
+                <a href="#tech">Технологии</a>
+                <a href="#portfolio">Наши работы</a>
+                <a href="#calculator">Калькулятор черновой</a>
+                <a href="#led-calculator">Калькулятор ленты</a>
+                <a href="#steps">Этапы</a>
+                <button class="btn-ghost" onclick="openModal('general', 'Консультация с шапки')">
+                    <i class="fas fa-phone-alt" style="margin-right: 8px;"></i>Связаться
+                </button>
+            </nav>
+        </div>
     </header>
 
-    <div class="container">
-        <h2>Наши работы</h2>
-        
-        <div class="portfolio-grid">
-            <!-- Карточка 1 -->
-            <div class="portfolio-card">
-                <div class="portfolio-img" onclick="openImageModal(this)">
-                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=800&q=80" alt="Сборка распределительного щита">
+    <!-- ГЕРОЙ -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="location-badge">
+                    <i class="fas fa-map-marker-alt"></i> Самара и Самарская область
                 </div>
-                <div class="portfolio-content">
-                    <h4>Сборка распределительного щита</h4>
-                    <p>Профессиональная компоновка и монтаж модульного оборудования.</p>
-                </div>
-            </div>
-
-            <!-- Карточка 2 -->
-            <div class="portfolio-card">
-                <div class="portfolio-img" onclick="openImageModal(this)">
-                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Черновая электрика">
-                </div>
-                <div class="portfolio-content">
-                    <h4>Черновая электрика</h4>
-                    <p>Прокладка кабельных линий и подготовка подрозетников.</p>
+                <h1>
+                    Электромонтаж <br />
+                    с <span class="highlight">продуманностью</span> <br />
+                    на надежных компонентах
+                </h1>
+                <p>
+                    Безопасные инженерные сети и светодизайн для квартир и коттеджей в Самаре. Проектирование, опрессовка гильзами ГМЛ, сборка силовых и слаботочных щитов, монтаж светодиодной подсветки.
+                </p>
+                <div class="hero-buttons">
+                    <button onclick="openModal('general', 'Заказ проекта с главного экрана')" class="btn btn-primary"><i class="fas fa-arrow-right"></i> Заказать проект</button>
+                    <a href="#calculator" class="btn btn-outline"><i class="fas fa-calculator"></i> Рассчитать цену</a>
                 </div>
             </div>
-
-            <!-- Карточка 3 -->
-            <div class="portfolio-card">
-                <div class="portfolio-img" onclick="openImageModal(this)">
-                    <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=800&q=80" alt="Установка механизмов">
-                </div>
-                <div class="portfolio-content">
-                    <h4>Установка механизмов</h4>
-                    <p>Монтаж розеток, выключателей и декоративных рамок.</p>
+            <div class="hero-image">
+                <div class="illustration">
+                    <img src="photo_2026-07-31_21-51-08.jpg" alt="Сборка распределительного щита КЕАЗ">
+                    <div class="badge">
+                        <i class="fas fa-shield-halved"></i> Гарантия
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Модальное окно для увеличенного просмотра -->
-    <div id="imageModal" class="modal" onclick="closeImageModal()">
-        <button class="modal-close" onclick="closeImageModal()">&times;</button>
-        <div class="modal-content-wrap" onclick="event.stopPropagation()">
-            <img id="modalFullImg" src="" alt="Увеличенное фото">
-            <div id="modalImgCaption" class="modal-caption"></div>
+    <!-- БРЕНДЫ -->
+    <section class="brands-section">
+        <div class="container">
+            <div class="brands-title">Используем комплектующие ведущих производителей</div>
+            <div class="brands-grid">
+                <div class="brand-item"><i class="fas fa-microchip"></i> КЕАЗ / OptiBox</div>
+                <div class="brand-item"><i class="fas fa-shield-alt"></i> ABB</div>
+                <div class="brand-item"><i class="fas fa-plug"></i> IEK / EKF</div>
+                <div class="brand-item"><i class="fas fa-layer-group"></i> Промрукав</div>
+                <div class="brand-item"><i class="fas fa-lightbulb"></i> Arlight</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-header">
+                <div class="tag"><i class="fas fa-star" style="margin-right: 6px;"></i> Наш подход</div>
+                <h2>Качество в каждом решении</h2>
+                <p>Мы используем проверенную продукцию и четкие инженерные стандарты, гарантирующие долговечность вашего ремонта.</p>
+            </div>
+
+            <div class="grid-2col">
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Сборка щитов любой сложности</h3>
+                    <p>Профессиональная компоновка распределительных щитов: вводные автоматы, реле напряжения, кросс-модули и УЗО на комплектующих КЕАЗ, ABB, IEK.</p>
+                    <span class="badge-quality"><i class="fas fa-check"></i> Щитовое оборудование</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-server"></i></div>
+                    <h3>Слаботочные щиты и блоки питания</h3>
+                    <p>Монтаж блоков питания светодиодной ленты на единой панели в шкафу или в отдельном щите. Удобный доступ для быстрого обслуживания и простой замены.</p>
+                    <span class="badge-quality"><i class="fas fa-check"></i> Удобный сервис</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-route"></i></div>
+                    <h3>Трассы в гофре и геометрия по нивелиру</h3>
+                    <p>Прокладка кабеля в сертифицированной негорючей гофре Промрукав. Защита линий от повреждений и параллельная укладка по лазеру.</p>
+                    <span class="badge-quality"><i class="fas fa-check"></i> Надежность</span>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3>Светодиодная подсветка и профили</h3>
+                    <p>Профессиональный монтаж скрытой подсветки: вклейка светодиодной ленты, пайка контактов, установка алюминиевых профилей и рассеивателей.</p>
+                    <span class="badge-quality"><i class="fas fa-check"></i> Светодизайн</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ТЕХНОЛОГИИ -->
+    <section class="tech-section" id="tech">
+        <div class="container">
+            <div class="features-header">
+                <div class="tag"><i class="fas fa-tools" style="margin-right: 6px;"></i> Стандарты качества</div>
+                <h2>Инженерная точность и световые решения</h2>
+                <p>Безупречная геометрия трасс, монолитные соединения и грамотная сборка автоматики</p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fas fa-compress-arrows-alt"></i>
+                    <h4>Опрессовка гильзами ГМЛ</h4>
+                    <p>Жилы в распаечных коробках обжимаются гильзами ГМЛ многоточечной пресс-клещевой опрессовкой. Контакт без нагрева и окисления.</p>
+                </div>
+
+                <div class="tech-item">
+                    <i class="fas fa-th-large"></i>
+                    <h4>Централизованный монтаж БП</h4>
+                    <p>Все блоки питания сводятся в один щит или мебельную нишу на рифленую/перфорированную панель с маркировкой каждой линии и клеммными колодками.</p>
+                </div>
+
+                <div class="tech-item">
+                    <i class="fas fa-crosshairs"></i>
+                    <h4>Лазерный нивелир</h4>
+                    <p>Каждая кабельная линия размечается по построителю плоскостей. Все трассы строго параллельны стенам и потолку.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <div class="features-header">
+                <div class="tag"><i class="fas fa-camera" style="margin-right: 6px;"></i> Портфолио</div>
+                <h2>Примеры наших выполненных работ</h2>
+                <p>Реальные объекты в Самаре: сборка силовых и слаботочных щитов, черновой монтаж трасс и светодизайн. Нажмите на любое фото для увеличения.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Сборка слаботочных щитов с БП -->
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="photo_2026-07-31_21-50-16.jpg" alt="Монтаж блоков питания подсветки в шкафу">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Панель блоков питания в шкафу</h4>
+                        <p>Установка блоков питания светодиодной ленты на алюминиевую панель в мебельном шкафу. Маркировка линий и удобные клеммы.</p>
+                        <span class="portfolio-tag">Слаботочный щит / БП</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="photo_2026-07-31_21-50-42.jpg" alt="Сборка панели блоков питания для подсветки">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Сборка панели блоков питания</h4>
+                        <p>Предварительная сборка и расключение блоков питания LED-подсветки с подписью всех потребителей для легкой замены.</p>
+                        <span class="portfolio-tag">Слаботочный щит / Монтаж</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="photo_7_2026-07-31_21-24-09.jpg" alt="Встраиваемый слаботочный щит с блоками питания">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Встраиваемый щит БП Arlight</h4>
+                        <p>Компоновка блоков питания Arlight и контроллеров во встраиваемом слаботочном щите с перфорированной панелью.</p>
+                        <span class="portfolio-tag">Слаботочный щит / Arlight</span>
+                    </div>
+                </div>
+
+                <!-- Сборка силовых щитов -->
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="photo_2026-07-31_21-51-08.jpg" alt="Сборка щита КЕАЗ OptiBox">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Сборка щита на КЕАЗ OptiBox</h4>
+                        <p>Многогрупповой щит с реле напряжения, УЗО и групповой автоматикой. Аккуратная укладка слаботочных и силовых шлейфов.</p>
+                        <span class="portfolio-tag">Сборка щита / КЕАЗ</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="photo_2026-07-31_21-51-34.jpg" alt="Встраиваемый щит ABB UK600">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Встраиваемый щит ABB UK600</h4>
+                        <p>Чистовая сборка многорядного щита с пластроном, индивидуальной маркировкой групп и индикацией напряжения.</p>
+                        <span class="portfolio-tag">Сборка щита / ABB</span>
+                    </div>
+                </div>
+
+                <!-- Черновые трассы и коробки -->
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="5375420213018433768.jpg" alt="Опрессовка гильзами ГМЛ">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Соединение жил гильзами ГМЛ</h4>
+                        <p>Надежное гильзование медных проводников в распаечной коробке с трехточечным опрессованием.</p>
+                        <span class="portfolio-tag">Черновой этап / Коробки</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="5434101835787606455.jpg" alt="Прокладка кабельных трасс">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Параллельная прокладка к щиту</h4>
+                        <p>Идеально ровные шлейфы кабелей, выравненные по лазерному нивелиру вдоль потолочных перекрытий.</p>
+                        <span class="portfolio-tag">Черновой этап / Трассы</span>
+                    </div>
+                </div>
+
+                <!-- Работы по ленте -->
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="5434101835787606460.jpg" alt="Контурная подсветка ванной комнаты">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Контурная подсветка в ванной</h4>
+                        <p>Монтаж алюминиевого профиля и светодиодной ленты с рассеивателем в стеновые ниши ванной комнаты.</p>
+                        <span class="portfolio-tag">Чистовой этап / LED</span>
+                    </div>
+                </div>
+
+                <div class="portfolio-card">
+                    <div class="portfolio-img" onclick="openImageModal(this)">
+                        <img src="photo_2_2026-07-31_21-25-29.jpg" alt="Подсветка ТВ-зоны">
+                    </div>
+                    <div class="portfolio-body">
+                        <h4>Контурная подсветка ТВ-панели</h4>
+                        <p>Монтаж профиля, пайка и наклейка светодиодной ленты по периметру декоративного панно.</p>
+                        <span class="portfolio-tag">Чистовой этап / LED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАЛЬКУЛЯТОР 1 -->
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <div class="features-header">
+                <div class="tag"><i class="fas fa-calculator" style="margin-right: 6px;"></i> Расчет работ</div>
+                <h2>Калькулятор чернового монтажа и механизмов</h2>
+                <p>Расчет стоимости чернового электромонтажа и чистовой установки механизмов</p>
+            </div>
+
+            <div class="calc-grid">
+                <div class="calc-form">
+                    <div class="form-group">
+                        <label>Площадь помещения: <span id="areaValue">50</span> м²</label>
+                        <input type="range" min="20" max="250" value="50" class="range-slider" id="areaRange" oninput="updatePrice()">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Установка механизмов (розетки, выключатели): <span id="socketsValue">30</span> шт.</label>
+                        <input type="range" min="0" max="150" value="30" class="range-slider" id="socketsRange" oninput="updatePrice()">
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <h3>Предварительная стоимость</h3>
+                    <div class="calc-price" id="totalPrice">135 000 ₽</div>
+                    <div class="calc-notice">Сумма приблизительная и будет точно названа только после подсчета мастером фронта работ на объекте.</div>
+                    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="openModal('roughCalc')"><i class="fas fa-paper-plane"></i> Зафиксировать смету</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАЛЬКУЛЯТОР 2 -->
+    <section class="calculator-section" id="led-calculator" style="background: #fdfefe;">
+        <div class="container">
+            <div class="features-header">
+                <div class="tag"><i class="fas fa-lightbulb" style="margin-right: 6px;"></i> Доп. работы</div>
+                <h2>Калькулятор монтажа светодиодной ленты</h2>
+                <p>Расчет комплексного монтажа подсветки (установка профиля, поклейка ленты, пайка и блоки питания)</p>
+            </div>
+
+            <div class="calc-grid">
+                <div class="calc-form">
+                    <div class="form-group">
+                        <label>Монтаж профиля и поклейка ленты: <span id="ledLengthValue">10</span> м.п.</label>
+                        <input type="range" min="0" max="100" value="10" class="range-slider" id="ledLengthRange" oninput="updateLedPrice()">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Количество точек паек / соединений: <span id="solderValue">4</span> шт.</label>
+                        <input type="range" min="0" max="30" value="4" class="range-slider" id="solderRange" oninput="updateLedPrice()">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Подключение блоков питания: <span id="powerValue">1</span> шт.</label>
+                        <input type="range" min="0" max="10" value="1" class="range-slider" id="powerRange" oninput="updateLedPrice()">
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <h3>Стоимость монтажа ленты</h3>
+                    <div class="calc-price" id="totalLedPrice">13 100 ₽</div>
+                    <div class="calc-notice">Сумма приблизительная и будет точно названа только после подсчета мастером фронта работ на объекте.</div>
+                    <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="openModal('ledCalc')"><i class="fas fa-paper-plane"></i> Заказать подсветку</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЭТАПЫ РАБОТЫ -->
+    <section class="steps" id="steps">
+        <div class="container">
+            <div class="features-header">
+                <div class="tag"><i class="fas fa-list-ol" style="margin-right: 6px;"></i> Процесс</div>
+                <h2>Как мы работаем</h2>
+                <p>Прозрачные этапы от первого звонка до сдачи объекта</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h4>Замер и проект</h4>
+                    <p>Выезд на объект в Самаре и области, составление технического задания и карты розеток.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h4>Черновой монтаж</h4>
+                    <p>Штробление, разметка по лазеру, прокладка трасс в гофре и коммутация коробок гильзами ГМЛ.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h4>Сборка щитов</h4>
+                    <p>Монтаж силового щита (КЕАЗ/ABB/IEK) и слаботочных панелей блоков питания с маркировкой линий.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <h4>Чистовые работы</h4>
+                    <p>Установка механизмов розеток, выключателей, поклейка LED-лент и проверка всей системы под нагрузкой.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОДВАЛ -->
+    <footer>
+        <div class="container footer-inner">
+            <div class="footer-logo">
+                <i class="fas fa-bolt" style="color: var(--accent);"></i> Разводка Про
+            </div>
+            <div>
+                © 2026 Разводка Про. Электромонтаж в Самаре и Самарской области.
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ФОРМ ЗАЯВОК -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle" style="font-size: 24px; margin-bottom: 10px;">Заказать консультацию</h3>
+            <p id="modalSubtitle" style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.</p>
+            <form onsubmit="handleSubmit(event)">
+                <input type="text" placeholder="Ваше имя" class="input-field" id="clientName" required oninput="validateName(this)">
+                
+                <div class="phone-input-wrap">
+                    <span class="prefix">+7</span>
+                    <input type="tel" placeholder="(999) 000-00-00" id="clientPhone" maxlength="10" required oninput="validatePhone(this)">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Отправить заявку</button>
+            </form>
         </div>
     </div>
 
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ УВЕЛИЧЕНИЯ ФОТО (ЛАЙТБОКС) -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <div class="image-modal-content" onclick="event.stopPropagation()">
+            <button class="close-image-modal" onclick="closeImageModal()">&times;</button>
+            <img id="modalFullImg" src="" alt="Увеличенное фото работы">
+            <div class="image-modal-caption" id="modalImgCaption"></div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
     <script>
-        // Функция для открытия увеличенного фото (Лайтбокс)
+        const TELEGRAM_BOT_TOKEN = '8685886364:AAHXMy8URcwttiJFB5-Szxk347FEGT37tOg';
+        const TELEGRAM_CHAT_ID = '715185366';
+
+        let currentSourceType = 'general';
+
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
+        });
+
+        // Функция открытия увеличенного фото
         function openImageModal(element) {
             const img = element.querySelector('img');
             const card = element.closest('.portfolio-card');
-            
-            const titleEl = card.querySelector('h4');
-            const descEl = card.querySelector('p');
-            
-            const title = titleEl ? titleEl.innerText : '';
-            const description = descEl ? descEl.innerText : '';
+            const title = card.querySelector('h4').innerText;
+            const description = card.querySelector('p').innerText;
 
             const modal = document.getElementById('imageModal');
             const fullImg = document.getElementById('modalFullImg');
             const caption = document.getElementById('modalImgCaption');
 
             fullImg.src = img.src;
-            caption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 14px; color: #94a3b8;">${description}</span>`;
-            
+            caption.innerHTML = `<strong>${title}</strong><br><span style="font-size: 14px; color: #a5b4fc;">${description}</span>`;
             modal.classList.add('open');
         }
 
-        // Функция закрытия модального окна
+        // Функция закрытия увеличенного фото
         function closeImageModal() {
             document.getElementById('imageModal').classList.remove('open');
         }
 
-        // Закрытие по нажатию клавиши ESC
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeImageModal();
-            }
-        });
-    </script>
+        function openModal(sourceType = 'general', customSubtitle = '') {
+            currentSourceType = sourceType;
+            const modalTitle = document.getElementById('modalTitle');
+            const modalSubtitle = document.getElementById('modalSubtitle');
 
+            if (sourceType === 'roughCalc') {
+                modalTitle.innerText = 'Зафиксировать смету';
+                const area = document.getElementById('areaRange').value;
+                const sockets = document.getElementById('socketsRange').value;
+                const price = document.getElementById('totalPrice').innerText;
+                modalSubtitle.innerText = `Параметры: Площадь ${area} м², розеток ${sockets} шт. Приблизительный итог: ${price} (точная стоимость после оценки мастера)`;
+            } else if (sourceType === 'ledCalc') {
+                modalTitle.innerText = 'Заказ подсветки';
+                const ledLen = document.getElementById('ledLengthRange').value;
+                const solder = document.getElementById('solderRange').value;
+                const power = document.getElementById('powerRange').value;
+                const price = document.getElementById('totalLedPrice').innerText;
+                modalSubtitle.innerText = `Параметры: Лента ${ledLen} м.п., паек ${solder} шт., БП ${power} шт. Приблизительный итог: ${price} (точная стоимость после оценки мастера)`;
+            } else {
+                modalTitle.innerText = 'Заказать консультацию';
+                modalSubtitle.innerText = customSubtitle || 'Оставьте номер телефона, и мы перезвоним для уточнения деталей проекта.';
+            }
+
+            document.getElementById('contactModal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('open');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        function validateName(input) {
+            input.value = input.value.replace(/[^a-zA-Zа-яА-ЯёЁ\s]/g, '');
+        }
+
+        function validatePhone(input) {
+            input.value = input.value.replace(/\D/g, '');
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const name = document.getElementById('clientName').value;
+            const phoneDigits = document.getElementById('clientPhone').value;
+
+            if (phoneDigits.length < 10) {
+                alert('Пожалуйста, введите корректный номер телефона (10 цифр после +7).');
+                return;
+            }
+
+            const fullPhone = '+7 ' + phoneDigits;
+            let text = '';
+
+            if (currentSourceType === 'roughCalc') {
+                const area = document.getElementById('areaRange').value;
+                const sockets = document.getElementById('socketsRange').value;
+                const price = document.getElementById('totalPrice').innerText;
+
+                text = `📋 *Зафиксирована смета (Черновой + Механизмы)*\n\n` +
+                       `👤 *Имя:* ${name}\n` +
+                       `📞 *Телефон:* ${fullPhone}\n\n` +
+                       `📐 *Площадь:* ${area} м²\n` +
+                       `🔌 *Розетки/выкл:* ${sockets} шт.\n` +
+                       `💰 *Приблизительная сумма:* ${price}\n` +
+                       `ℹ️ _Сумма предварительная, уточняется мастером на объекте_`;
+            } else if (currentSourceType === 'ledCalc') {
+                const ledLen = document.getElementById('ledLengthRange').value;
+                const solder = document.getElementById('solderRange').value;
+                const power = document.getElementById('powerRange').value;
+                const price = document.getElementById('totalLedPrice').innerText;
+
+                text = `💡 *Заявка на монтаж светодиодной ленты*\n\n` +
+                       `👤 *Имя:* ${name}\n` +
+                       `📞 *Телефон:* ${fullPhone}\n\n` +
+                       `📏 *Длина профиля/ленты:* ${ledLen} м.п.\n` +
+                       `🔗 *Точек паек:* ${solder} шт.\n` +
+                       `⚡ *Блоков питания:* ${power} шт.\n` +
+                       `💰 *Приблизительная сумма:* ${price}\n` +
+                       `ℹ️ _Сумма предварительная, уточняется мастером на объекте_`;
+            } else {
+                text = `⚡ *Новая заявка на сайте Разводка Про (Самара)*\n\n` +
+                       `👤 *Имя:* ${name}\n` +
+                       `📞 *Телефон:* ${fullPhone}`;
+            }
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: text,
+                        parse_mode: 'Markdown'
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+                    form.reset();
+                    closeModal();
+                } else {
+                    alert('Произошла ошибка при отправке. Пожалуйста, убедитесь, что вы запустили бота в Telegram.');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка сети. Проверьте подключение к интернету.');
+            }
+        }
+
+        const ROUGH_PRICE_PER_M2 = 2400; 
+        const SOCKET_PRICE = 350;        
+        const LED_COMBO_PRICE = 1000;    
+        const SOLDER_PRICE = 500;        
+        const POWER_PRICE = 1000;        
+
+        function updatePrice() {
+            // Исправлена синтаксическая ошибка со скобками
+            const area = parseInt(document.getElementById('areaRange').value);
+            const sockets = parseInt(document.getElementById('socketsRange').value);
+
+            document.getElementById('areaValue').innerText = area;
+            document.getElementById('socketsValue').innerText = sockets;
+
+            const roughCost = area * ROUGH_PRICE_PER_M2;
+            const socketsCost = sockets * SOCKET_PRICE;
+            const total = roughCost + socketsCost;
+
+            document.getElementById('totalPrice').innerText = total.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        function updateLedPrice() {
+            const ledLength = parseInt(document.getElementById('ledLengthRange').value);
+            const solder = parseInt(document.getElementById('solderRange').value);
+            const power = parseInt(document.getElementById('powerRange').value);
+
+            document.getElementById('ledLengthValue').innerText = ledLength;
+            document.getElementById('solderValue').innerText = solder;
+            document.getElementById('powerValue').innerText = power;
+
+            const comboCost = ledLength * LED_COMBO_PRICE;
+            const solderCost = solder * SOLDER_PRICE;
+            const powerCost = power * POWER_PRICE;
+
+            const total = comboCost + solderCost + powerCost;
+            document.getElementById('totalLedPrice').innerText = total.toLocaleString('ru-RU') + ' ₽';
+        }
+
+        updatePrice();
+        updateLedPrice();
+    </script>
 </body>
 </html>
