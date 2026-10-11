@@ -86,6 +86,10 @@ section[id]{scroll-margin-top:72px}
 .dimt{fill:var(--accent);font:500 12px var(--f-mono)}
 .rm{fill:var(--ink);font:500 12px var(--f-mono);letter-spacing:.06em}
 .rm2{fill:var(--muted);font:400 11px var(--f-mono)}
+.rms{fill:var(--ink);font:500 10px var(--f-mono);letter-spacing:.04em}
+.rm2s{fill:var(--muted);font:400 10px var(--f-mono)}
+.bal{fill:none;stroke:var(--ink);stroke-width:1.5}
+.fx{fill:none;stroke:var(--muted);stroke-width:1}
 @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
 .draw{stroke-dasharray:1;animation:draw 1.8s cubic-bezier(.3,.6,.2,1) both}
 .d2{animation-delay:.35s}.d3{animation-delay:.7s}
@@ -290,45 +294,66 @@ footer{border-top:1px solid var(--line);padding-block:40px}
     </div>
 
     <figure class="plan">
-      <svg viewBox="0 0 540 430" role="img" aria-label="Обмерный план квартиры 54 квадратных метра: гостиная-кухня, спальня, санузел и прихожая">
-        <path class="dim draw d2" pathLength="1" d="M40 38H490M40 32V44M490 32V44"/>
-        <text class="dimt" x="265" y="28" text-anchor="middle">9 000</text>
-        <path class="dim draw d2" pathLength="1" d="M22 60V360M16 60H28M16 360H28"/>
-        <text class="dimt" transform="translate(13 210) rotate(-90)" text-anchor="middle">6 000</text>
+      <svg viewBox="0 0 540 505" role="img" aria-label="Обмерный план типовой двухкомнатной квартиры 54 квадратных метра: кухня, прихожая, гостиная, спальня, ванная, туалет и балкон">
+        <path class="dim draw d2" pathLength="1" d="M90 34H450M90 28V40M450 28V40"/>
+        <text class="dimt" x="270" y="24" text-anchor="middle">7 200</text>
+        <path class="dim draw d2" pathLength="1" d="M56 90V465M50 90H62M50 465H62"/>
+        <text class="dimt" transform="translate(46 277) rotate(-90)" text-anchor="middle">7 500</text>
+        <path class="dim draw d3" pathLength="1" d="M474 90V465M468 90H480M468 315H480M468 465H480"/>
+        <text class="dimt" transform="translate(491 202) rotate(-90)" text-anchor="middle">4 500</text>
+        <text class="dimt" transform="translate(491 390) rotate(-90)" text-anchor="middle">3 000</text>
 
-        <path class="w draw" pathLength="1" d="M40 60H490V360H40Z"/>
-        <path class="p draw d2" pathLength="1" d="M290 60V360M290 230H490M390 230V360"/>
+        <path class="bal" d="M270 90V50H420V90"/>
+        <text class="rm2" x="345" y="74" text-anchor="middle">БАЛКОН</text>
 
-        <path class="gap" d="M290 150V190M290 290V330M390 280V320M410 360H450"/>
-        <path class="gap" d="M80 60H240M340 60H440M40 120V280M490 100V180"/>
-        <rect class="win" x="80" y="57.5" width="160" height="5"/>
-        <rect class="win" x="340" y="57.5" width="100" height="5"/>
-        <rect class="win" x="37.5" y="120" width="5" height="160"/>
-        <rect class="win" x="487.5" y="100" width="5" height="80"/>
+        <path class="w draw" pathLength="1" d="M90 90H450V465H90Z"/>
+        <path class="p draw d2" pathLength="1" d="M240 90V465M90 255H240M90 375H240M190 375V465M240 315H450"/>
+
+        <path class="gap" d="M130 90H200M275 90H345M355 90H400M450 140V230M450 335V415"/>
+        <path class="gap" d="M90 290V335M105 255H150M240 265V310M240 325V370M125 375H170M200 375H235"/>
+        <rect class="win" x="130" y="87.5" width="70" height="5"/>
+        <rect class="win" x="275" y="87.5" width="70" height="5"/>
+        <rect class="win" x="447.5" y="140" width="5" height="90"/>
+        <rect class="win" x="447.5" y="335" width="5" height="80"/>
 
         <g class="door">
-          <path d="M290 150H330M330 150A40 40 0 0 1 290 190"/>
-          <path d="M290 290H250M250 290A40 40 0 0 0 290 330"/>
-          <path d="M390 280H350M350 280A40 40 0 0 0 390 320"/>
-          <path d="M410 360V320M410 320A40 40 0 0 1 450 360"/>
+          <path d="M90 290H135M135 290A45 45 0 0 1 90 335"/>
+          <path d="M105 255V210M105 210A45 45 0 0 1 150 255"/>
+          <path d="M240 265H285M285 265A45 45 0 0 1 240 310"/>
+          <path d="M240 325H285M285 325A45 45 0 0 1 240 370"/>
+          <path d="M125 375V330M125 330A45 45 0 0 1 170 375"/>
+          <path d="M200 375V340M200 340A35 35 0 0 1 235 375"/>
+          <path d="M355 90V135M355 135A45 45 0 0 0 400 90"/>
         </g>
 
-        <text class="rm" x="165" y="200" text-anchor="middle">ГОСТИНАЯ-КУХНЯ</text>
-        <text class="rm2" x="165" y="218" text-anchor="middle">30,0 м²</text>
-        <text class="rm" x="390" y="138" text-anchor="middle">СПАЛЬНЯ</text>
-        <text class="rm2" x="390" y="156" text-anchor="middle">13,6 м²</text>
-        <text class="rm" x="330" y="256" text-anchor="middle">САНУЗЕЛ</text>
-        <text class="rm2" x="330" y="272" text-anchor="middle">5,2 м²</text>
-        <text class="rm" x="440" y="262" text-anchor="middle">ПРИХОЖАЯ</text>
-        <text class="rm2" x="440" y="278" text-anchor="middle">5,2 м²</text>
+        <g class="fx">
+          <rect x="92.5" y="92.5" width="145" height="28"/>
+          <rect x="140" y="97" width="32" height="18"/>
+          <rect x="204" y="96" width="28" height="20"/>
+          <circle cx="211" cy="102" r="3"/><circle cx="225" cy="102" r="3"/><circle cx="211" cy="110" r="3"/><circle cx="225" cy="110" r="3"/>
+          <rect x="94" y="426" width="84" height="36" rx="3"/>
+          <rect x="98" y="430" width="76" height="28" rx="10"/>
+          <rect x="94" y="380" width="24" height="18"/>
+          <rect x="203" y="452" width="24" height="10"/>
+          <ellipse cx="215" cy="441" rx="9" ry="11"/>
+        </g>
 
-        <path class="dim draw d3" pathLength="1" d="M40 384H490M40 378V390M290 378V390M390 378V390M490 378V390"/>
-        <text class="dimt" x="165" y="404" text-anchor="middle">5 000</text>
-        <text class="dimt" x="340" y="404" text-anchor="middle">2 000</text>
-        <text class="dimt" x="440" y="404" text-anchor="middle">2 000</text>
-        <text class="rm2" x="490" y="424" text-anchor="end">ОБМЕРНЫЙ ПЛАН · М 1:100</text>
+        <text class="rm" x="345" y="196" text-anchor="middle">ГОСТИНАЯ</text>
+        <text class="rm2" x="345" y="213" text-anchor="middle">18,9 м²</text>
+        <text class="rm" x="345" y="388" text-anchor="middle">СПАЛЬНЯ</text>
+        <text class="rm2" x="345" y="405" text-anchor="middle">12,6 м²</text>
+        <text class="rm" x="165" y="176" text-anchor="middle">КУХНЯ</text>
+        <text class="rm2" x="165" y="192" text-anchor="middle">9,9 м²</text>
+        <text class="rm" x="182" y="312" text-anchor="middle">ПРИХОЖАЯ</text>
+        <text class="rm2" x="182" y="328" text-anchor="middle">7,2 м²</text>
+        <text class="rm" x="150" y="406" text-anchor="middle">ВАННАЯ</text>
+        <text class="rm2" x="150" y="421" text-anchor="middle">3,6 м²</text>
+        <text class="rms" x="215" y="400" text-anchor="middle">ТУАЛЕТ</text>
+        <text class="rm2s" x="215" y="413" text-anchor="middle">1,8 м²</text>
+
+        <text class="rm2" x="450" y="492" text-anchor="end">ОБМЕРНЫЙ ПЛАН · М 1:100</text>
       </svg>
-      <figcaption class="mono">Первый документ, который вы получаете: план с размерами в мм</figcaption>
+      <figcaption class="mono">Типовая двушка 54 м²: изолированные комнаты, раздельный санузел, балкон. Размеры в мм</figcaption>
     </figure>
   </section>
 
