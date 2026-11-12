@@ -1,5 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Отвес</title>
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style><title>Отвес</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=IBM+Plex+Mono:wght@400;500&family=Onest:wght@400;500;600;700&display=swap">
@@ -175,6 +174,8 @@ legend{padding:0;margin-bottom:10px;font:600 .9rem var(--f-body);color:var(--mut
 .row .pc{font:500 .85rem var(--f-body);color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
 .row.sum{border-top:2px solid var(--ink);font-weight:700}
 .note{font-size:.88rem;color:var(--muted)}
+.lvnote{margin-top:10px}
+.sw-m{background:var(--muted)}
 
 .pr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:clamp(36px,6vw,64px)}
 @media(max-width:820px){.pr{grid-template-columns:minmax(0,1fr)}}
@@ -351,7 +352,7 @@ footer{background:var(--band);padding-block:36px}
       <ul>
         <li class="svc">
           <h3>Дизайн-проект</h3>
-          <p>Планировка, визуализации и чертежи для мастеров. После проекта смета считается по чертежам, а не на глаз.</p>
+          <p>Планировка, визуализации и чертежи для мастеров. Мебель в проекте подбираем только из каталога Озона, со ссылками. После проекта смета считается по чертежам, а не на глаз.</p>
           <span class="price">от 1 800 ₽/м²</span>
         </li>
         <li class="svc">
@@ -370,7 +371,7 @@ footer{background:var(--band);padding-block:36px}
           <span class="price">по смете</span>
         </li>
       </ul>
-      <p class="fine">Цены «от» даны для уровня «Стандарт» в новостройке и включают материалы, электрику, сантехнику и нашу работу по ведению объекта. Итог зависит от состояния квартиры и выбранных материалов.</p>
+      <p class="fine">Цены «от» даны для уровня «Стандарт» в новостройке и включают материалы, электрику, сантехнику и нашу работу по ведению объекта. Мебель в эту цену не входит. Итог зависит от состояния квартиры и выбранных материалов.</p>
     </div>
   </section>
 
@@ -512,10 +513,11 @@ footer{background:var(--band);padding-block:36px}
           <fieldset class="fld">
             <legend>Уровень отделки</legend>
             <div class="seg">
-              <label><input type="radio" name="level" value="std"><span>Стандарт<small>надёжная база</small></span></label>
+              <label><input type="radio" name="level" value="std"><span>Стандарт<small>надёжный массовый сегмент</small></span></label>
               <label><input type="radio" name="level" value="comf" checked><span>Комфорт<small>основной выбор</small></span></label>
-              <label><input type="radio" name="level" value="prem"><span>Премиум<small>авторские решения</small></span></label>
+              <label><input type="radio" name="level" value="prem"><span>Премиум<small>дорогие материалы</small></span></label>
             </div>
+            <p class="note lvnote">Уровень меняет цену только там, где меняется материал или способ работы: краска, потолки, пол, плитка, щиток и розетки, сантехника, двери, плинтус, свет. Черновые работы и точки электрики стоят одинаково на всех уровнях.</p>
           </fieldset>
           <fieldset class="fld">
             <legend>Дополнительно</legend>
@@ -523,7 +525,19 @@ footer{background:var(--band);padding-block:36px}
             <label class="chk"><span class="l"><input type="checkbox" id="o-elec" checked>Электрика: новая разводка</span><span class="pp">по точкам</span></label>
             <label class="chk"><span class="l"><input type="checkbox" id="o-plumb" checked>Сантехника: новая разводка</span><span class="pp">по точкам</span></label>
             <label class="chk"><span class="l"><input type="checkbox" id="o-floor">Тёплый пол</span><span class="pp">25% площади</span></label>
+            <label class="chk"><span class="l"><input type="checkbox" id="o-wall">Обои в жилых комнатах</span><span class="pp">30% стен вместо краски</span></label>
+            <label class="chk"><span class="l"><input type="checkbox" id="o-door">Замена входной двери</span><span class="pp">1 шт</span></label>
+            <label class="chk"><span class="l"><input type="checkbox" id="o-glass">Стеклянная перегородка</span><span class="pp">около 5% площади</span></label>
             <label class="chk"><span class="l"><input type="checkbox" id="o-kit">Комплектация и доставка</span><span class="pp">3% от материалов</span></label>
+          </fieldset>
+          <fieldset class="fld">
+            <legend>Мебель</legend>
+            <div class="seg">
+              <label><input type="radio" name="furn" value="none" checked><span>Не входит<small>купите сами</small></span></label>
+              <label><input type="radio" name="furn" value="custom"><span>На заказ<small>кухня и шкафы</small></span></label>
+              <label><input type="radio" name="furn" value="ozon"><span>С Озона<small>не в смете</small></span></label>
+            </div>
+            <p class="note lvnote" id="furn-note"></p>
           </fieldset>
         </div>
 
@@ -558,7 +572,7 @@ footer{background:var(--band);padding-block:36px}
           <tfoot id="est-f"></tfoot>
         </table>
       </div>
-      <p class="fine">Цены для Самары на 2026 год. Объёмы считаем по типовой планировке: 2,2 м² стен на каждый квадратный метр пола и 0,85 точки электрики на метр. Точка электрики это розетка, выключатель или световой вывод: на черновом этапе в неё входят штроба, кабель, подрозетник и монтаж. После замера объёмы заменяют фактические.</p>
+      <p class="fine">Цены для Самары на 2026 год. Объёмы считаем по типовой планировке: 2,2 м² стен на каждый квадратный метр пола и 0,85 точки электрики на метр. Точка электрики это розетка, выключатель или световой вывод: на черновом этапе в неё входят штроба, кабель, подрозетник и монтаж. Под каждой позицией написано, какие материалы заложены на выбранном уровне. После замера объёмы заменяют фактические.</p>
     </div>
   </section>
 
@@ -663,9 +677,9 @@ footer{background:var(--band);padding-block:36px}
 
       <div class="sub"><h3>Три уровня материалов</h3><span class="mono">выбираете в калькуляторе выше</span></div>
       <ul class="lv">
-        <li><h4>Стандарт</h4><p>Сертифицированные материалы массового сегмента с заводской маркировкой партии. Подходит для первой квартиры, сдачи и аренды.</p></li>
-        <li><h4>Комфорт</h4><p>Керамогранит и сантехника известных европейских фабрик, ламинат или инженерная доска, краска с моющимся покрытием.</p></li>
-        <li><h4>Премиум</h4><p>Натуральный камень, массив и шпон, встроенная инженерия, авторские решения по свету и мебели.</p></li>
+        <li><h4>Стандарт</h4><p>Материалы массового сегмента: краска Текс или Dulux, натяжной потолок, ламинат 33 класса, керамогранит 60×60, розетки Legrand Etika, щиток IEK, сантехника Cersanit и Iddis, двери экошпон. Подходит для первой квартиры, сдачи и аренды.</p></li>
+        <li><h4>Комфорт</h4><p>Краска Tikkurila, потолок с теневым профилем, инженерная доска или кварцвинил, керамогранит 60×120, розетки Schneider, щиток ABB с дифавтоматами, инсталляция Geberit, защита от протечек, шпонированные двери.</p></li>
+        <li><h4>Премиум</h4><p>Краска Little Greene или Farrow &amp; Ball по стенам уровня Q4, гипсокартонные потолки с подсветкой, паркетная доска, крупноформатный керамогранит и камень, механизмы Werkel, сантехника Duravit и Hansgrohe, скрытые двери, трековый свет.</p></li>
       </ul>
     </div>
   </section>
@@ -747,6 +761,10 @@ footer{background:var(--band);padding-block:36px}
         <details>
           <summary>Что будет, если цена вырастет по ходу работ?</summary>
           <p>Цена в договоре сама не меняется. Если в стене нашли проблему, сначала показываем её на фото, потом считаем и начинаем работать только после вашего согласия.</p>
+        </details>
+        <details>
+          <summary>А мебель?</summary>
+          <p>Есть три варианта. Кухню и встроенные шкафы можно заказать у фабрики в Самаре, в калькуляторе они считаются отдельным блоком с изготовлением и монтажом. Либо вы покупаете мебель сами, и в смету она не входит. Дизайн-проект рассчитан на мебель из каталога Озона: даём ссылки и размеры, а заказываете, принимаете и собираете вы. Покупку и доставку мебели мы на себя не берём.</p>
         </details>
         <details>
           <summary>Кто покупает материалы?</summary>
@@ -862,12 +880,14 @@ footer{background:var(--band);padding-block:36px}
   function r100(x){ return Math.round(x/100)*100; }
   function p10(x){ return Math.round(x/10)*10; }
 
-  /* Цены Самары, 2026, уровень «Стандарт». Всё, что нужно поправить под себя, лежит здесь. */
+  /* Цены Самары, 2026. Всё, что нужно поправить под себя, лежит здесь.
+     Цена позиции задана либо одним числом (не зависит от уровня), либо тройкой [Стандарт, Комфорт, Премиум].
+     Уровень влияет только там, где реально меняется материал или способ работы. */
   var FEE = 0.10, KIT = 0.03, RES = 0.07;
   var LV = {
-    std:  {n:'Стандарт', kw:1,    km:1,   k:1,    design:1800},
-    comf: {n:'Комфорт',  kw:1.25, km:1.7, k:1.15, design:2200},
-    prem: {n:'Премиум',  kw:1.7,  km:3.0, k:1.3,  design:3000}
+    std:  {n:'Стандарт', i:0, k:1,    design:1800},
+    comf: {n:'Комфорт',  i:1, k:1.15, design:2200},
+    prem: {n:'Премиум',  i:2, k:1.3,  design:3000}
   };
   var TY = {
     'new': {n:'Новостройка', kw:1,    km:1,    wk:0, demo:false},
@@ -879,9 +899,17 @@ footer{background:var(--band);padding-block:36px}
     {id:'elec',   n:'Электрика: новая разводка'},
     {id:'plumb',  n:'Сантехника: новая разводка'},
     {id:'floor',  n:'Тёплый пол'},
+    {id:'wall',   n:'Обои в жилых комнатах'},
+    {id:'door',   n:'Замена входной двери'},
+    {id:'glass',  n:'Стеклянная перегородка'},
     {id:'kit',    n:'Комплектация и доставка'}
   ];
-  var STAGE = {b:'Черновой этап', f:'Чистовой этап', o:'Дополнительно'};
+  var FURN = {
+    none:   {n:'не входит в смету', note:'Мебель в смету не входит: покупаете и ставите сами после ремонта.'},
+    custom: {n:'на заказ',          note:'Кухню и встроенные шкафы делает фабрика в Самаре по замеру после отделки. Цена с изготовлением и монтажом, оплата по договору фабрики.'},
+    ozon:   {n:'с Озона',           note:'В смету не входит. Дизайн-проект подбирает мебель только из каталога Озона и даёт ссылки, а заказываете, принимаете и собираете вы сами. Мы мебель не покупаем и за неё не отвечаем.'}
+  };
+  var STAGE = {b:'Черновой этап', f:'Чистовой этап', o:'Дополнительно', m:'Мебель на заказ'};
 
   function state(){
     var a = parseInt($('#area-n').value,10);
@@ -890,55 +918,111 @@ footer{background:var(--band);padding-block:36px}
     var opts = {};
     OPT.forEach(function(o){ opts[o.id] = $('#o-'+o.id).checked; });
     var f = $('#calc');
-    return {area:a, type:f.elements['type'].value, level:f.elements['level'].value, opts:opts};
+    return {area:a, type:f.elements['type'].value, level:f.elements['level'].value, furn:f.elements['furn'].value, opts:opts};
   }
 
-  /* Позиции сметы: этап, шкала цен (fin: растёт с уровнем отделки), название, единица, объём, цена работ, цена материалов за единицу */
+  /* Позиции сметы: этап, название, единица, объём, работа и материалы за единицу (число или тройка по уровням), описание по уровням.
+     opt: flat, чтобы тип объекта не менял цену; furn, мебель вне резерва; lv, уровни, на которых позиция есть. */
   function positions(s){
     var a=s.area, wall=Math.round(a*2.2), pts=Math.round(a*0.85), wp=Math.round(a/10)+5,
-        wet=Math.round(a*0.18), tile=Math.round(a*0.45), lam=Math.round(a*0.7), doors=Math.round(a/11)+1;
-    var P=[];
-    function add(st,fin,name,u,per,q,w,m,flat){ P.push({st:st,fin:fin,n:name,u:u,per:per,q:q,w:w,m:m,flat:flat}); }
-    if(TY[s.type].demo) add('b',false,'Демонтаж и вывоз мусора','м²','м²',a,1100,400);
-    add('b',false,'Штукатурка стен по маякам','м²','м²',wall,640,420);
-    add('b',false,'Стяжка пола полусухая','м²','м²',a,480,800);
-    if(s.opts.elec)  add('b',false,'Электрика: новая разводка','точек','точку',pts,3230,1900,true);
-    if(s.opts.plumb) add('b',false,'Водоснабжение и канализация: новая разводка','точек','точку',wp,6050,8500);
-    add('b',false,'Гидроизоляция мокрых зон','м²','м²',wet,300,500);
-    add('f',true,'Шпаклёвка и окраска стен','м²','м²',wall,830,450);
-    add('f',true,'Потолки','м²','м²',a,800,600);
-    add('f',true,'Ламинат или паркетная доска','м²','м²',lam,480,1400);
-    add('f',true,'Плитка и керамогранит','м²','м²',tile,2800,2400);
-    add('f',true,'Розетки, выключатели, свет','точек','точку',pts,600,1300);
-    add('f',true,'Сантехнические приборы','точек','точку',wp,2860,11000);
-    add('f',true,'Двери с наличниками и плинтусами','шт','шт',doors,7300,14000);
-    if(s.opts.floor) add('o',true,'Тёплый пол электрический','м²','м²',Math.round(a*0.25),900,3200);
+        wet=Math.round(a*0.18), tile=Math.round(a*0.45), lam=Math.round(a*0.7), doors=Math.round(a/11)+1,
+        paper=s.opts.wall ? Math.round(wall*0.3) : 0, paint=wall-paper, mod=12+Math.round(a*0.25),
+        kitL=Math.round(2.4+a/30), wardL=Math.round(a/12), glassA=Math.max(3,Math.round(a*0.05)),
+        P=[];
+    function add(st,name,u,per,q,w,m,spec,o){ o=o||{}; P.push({st:st,n:name,u:u,per:per,q:q,w:w,m:m,spec:spec,flat:o.flat,furn:o.furn,lv:o.lv}); }
+
+    /* Черновой этап: работы одинаковы на всех уровнях */
+    if(TY[s.type].demo) add('b','Демонтаж и вывоз мусора','м²','м²',a,1100,400,'Снос покрытий и перегородок по проекту, мешки, вывоз и утилизация');
+    add('b','Штукатурка стен по маякам','м²','м²',wall,[640,640,820],420,
+      ['Ротбанд по маякам, допуск 3 мм на 2 м, под покраску и обои','Ротбанд по маякам, допуск 3 мм на 2 м, под покраску и обои','Ротбанд, второй проход правилом, допуск 2 мм на 2 м, под матовую краску']);
+    add('b','Стяжка пола полусухая','м²','м²',a,480,800,'Полусухая стяжка по лазерному уровню, фибра, демпферная лента');
+    if(s.opts.elec){
+      add('b','Электрика: новая разводка','точек','точку',pts,3230,1900,'Медный кабель ВВГнг-LS, штроба, подрозетники, монтаж. От уровня не зависит',{flat:true});
+      add('b','Электрощит и автоматика','модулей','модуль',mod,0,[1000,2200,4300],
+        ['Щит и автоматы IEK или EKF, УЗО. Сборка входит в точки','Щит и автоматы ABB или Legrand, дифавтоматы на мокрые зоны, реле напряжения. Сборка входит в точки','Щит ABB или Schneider, дифавтомат на каждую группу, защита от импульсных перенапряжений, запас модулей. Сборка входит в точки'],{flat:true});
+    }
+    if(s.opts.plumb){
+      add('b','Водоснабжение и канализация: новая разводка','точек','точку',wp,6050,[8500,11500,16500],
+        ['Трубы PPR Valtec, шаровые краны, канализация Политэк','Коллекторная разводка, трубы PPR Valtec, фильтры грубой очистки, редуктор давления','Коллекторы Giacomini, трубы PEX Rehau, звукоизолированная канализация']);
+      add('b','Защита от протечек','комплект','комплект',1,[0,7000,9000],[0,18000,36000],
+        ['','Нептун или Gidrolock: кран на стояке, датчики в мокрых зонах','Нептун Pro: датчики на каждой точке, управление по Wi-Fi'],{lv:[1,2]});
+    }
+    add('b','Гидроизоляция мокрых зон','м²','м²',wet,300,500,'Обмазочная гидроизоляция в два слоя, заход на стены от 20 см');
+
+    /* Чистовой этап: здесь уровень реально меняет цену */
+    add('f','Шпаклёвка и окраска стен','м²','м²',paint,[830,1100,1900],[450,650,1250],
+      ['Шпаклёвка в два слоя, краска Текс или Dulux Ultra Resist, 2 слоя','Финишная шпаклёвка и шлифовка, краска Tikkurila или Dulux Diamond, моющаяся, 2 слоя','Шпаклёвка уровня Q4, проверка боковым светом, краска Little Greene или Farrow & Ball, 3 слоя']);
+    if(paper) add('f','Оклейка обоев','м²','м²',paper,[450,550,950],[900,1900,6500],
+      ['Флизелиновые обои под покраску или виниловые на флизелине','Виниловые на флизелине Erismann или Rasch','Дизайнерские и текстильные обои, подгонка рисунка по раппорту']);
+    add('f','Потолки','м²','м²',a,[800,1300,2400],[600,1000,1500],
+      ['Натяжной потолок матовый ПВХ, один уровень','Натяжной потолок с теневым профилем и нишей под карниз','Гипсокартон в два уровня, скрытая подсветка, покраска']);
+    add('f','Напольное покрытие','м²','м²',lam,[480,700,1300],[1400,3200,7500],
+      ['Ламинат 33 класса с подложкой','Инженерная доска или кварцвинил с подложкой','Паркетная доска из массива, укладка и масло']);
+    add('f','Плитка и керамогранит','м²','м²',tile,[2800,3400,5200],[2400,4200,9500],
+      ['Керамогранит 60×60 Kerama Marazzi или аналог, затирка Ceresit','Керамогранит 60×120 Italon или Atlas Concorde, затирка Litokol','Крупный формат 120×280 или камень, система выравнивания, эпоксидная затирка']);
+    add('f','Плинтус','м.п.','м.п.',Math.round(a*1.2),[180,250,600],[150,450,1500],
+      ['МДФ или ПВХ плинтус 60 мм','МДФ окрашенный 80 мм','Скрытый алюминиевый плинтус с теневым швом']);
+    add('f','Розетки и выключатели','точек','точку',pts,[600,600,900],[650,1300,3200],
+      ['Legrand Etika или IEK, пластик','Schneider AtlasDesign или Legrand Valena','Werkel, Livolo или Gira, металл и стекло']);
+    add('f','Светильники','шт','шт',Math.round(a*0.35),[450,450,650],[700,1800,5500],
+      ['Точечные светодиодные Эра или IEK','Точечные и трековые Maytoni или Lightstar, тёплый свет 3000 К','Трековая система, профильная подсветка, дизайнерские светильники']);
+    add('f','Сантехнические приборы','точек','точку',wp,[2600,3400,4600],[8000,18000,42000],
+      ['Унитаз-компакт Cersanit или Sanita, смесители Iddis, ванна или поддон','Инсталляция Geberit, подвесной унитаз, смесители Grohe, душевой трап','Инсталляция Geberit, Duravit или Villeroy & Boch, смесители Hansgrohe, скрытый душ']);
+    add('f','Межкомнатные двери','шт','шт',doors,[3500,4200,7500],[9000,16000,38000],
+      ['Экошпон в комплекте с коробкой и наличниками','Шпон или эмаль, скрытые петли, наличники','Скрытые двери под покраску вровень со стеной или с остеклением']);
+
+    /* Дополнительно */
+    if(s.opts.door) add('o','Входная дверь: замена','шт','шт',1,[5500,6500,9000],[38000,75000,160000],
+      ['Металлическая дверь Torex или Бульдорс, два замка','Дверь Аргус или Йошкар с шумоизоляцией, замки 3 класса','Дверь с терморазрывом и отделкой под интерьер, замки 4 класса']);
+    if(s.opts.glass) add('o','Стеклянная перегородка','м²','м²',glassA,[2500,3500,6000],[14000,22000,38000],
+      ['Алюминиевый профиль, закалённое стекло 8 мм','Профиль с чёрным анодированием, триплекс, дверь-маятник','Безрамная перегородка из стекла 10 мм, фурнитура премиум-класса']);
+    if(s.opts.floor) add('o','Тёплый пол электрический','м²','м²',Math.round(a*0.25),[900,1000,1300],[3200,4500,6500],
+      ['Греющий мат, механический терморегулятор','Греющий мат Devi или Теплолюкс, термостат с датчиком пола','Мат Devi, термостат с Wi-Fi, зонирование']);
+
+    /* Мебель на заказ: фабрика делает по замеру, цена с изготовлением и монтажом */
+    if(s.furn==='custom'){
+      add('m','Кухня на заказ','м.п.','м.п.',kitL,[4500,6000,9000],[33000,56000,98000],
+        ['ЛДСП или МДФ в плёнке, фурнитура Boyard, столешница постформинг','МДФ в эмали, фурнитура Blum, столешница из искусственного камня','Шпон или эмаль, Blum Legrabox, кварцевая столешница, подсветка'],{furn:true,flat:true});
+      add('m','Встроенные шкафы и гардероб','м.п.','м.п.',wardL,[2500,3500,5500],[19000,30000,58000],
+        ['ЛДСП, распашные или купе, стандартная фурнитура','МДФ-фасады, система хранения внутри, фурнитура Blum','Шпон или эмаль, подсветка, полное наполнение внутри'],{furn:true,flat:true});
+    }
     return P;
   }
 
   function calc(s){
-    var L=LV[s.level], T=TY[s.type];
-    var P=positions(s).map(function(p){
-      var wf = p.flat ? 1 : (p.fin ? L.kw : 1+(L.kw-1)*0.6);
-      var mf = p.fin ? L.km : 1+(L.km-1)*0.2;
-      var pw=p10(p.w*wf*T.kw), pm=p10(p.m*mf*T.km);
-      return {st:p.st,n:p.n,u:p.u,per:p.per,q:p.q,pw:pw,pm:pm,W:p.q*pw,M:p.q*pm};
+    var L=LV[s.level], T=TY[s.type], I=L.i;
+    function pick(x){ return Array.isArray(x) ? x[I] : x; }
+    var P=[];
+    positions(s).forEach(function(p){
+      if(p.lv && p.lv.indexOf(I)<0) return;
+      var kw=p.furn?1:T.kw, km=p.furn?1:T.km;
+      var pw=p10(pick(p.w)*(p.flat?1:kw)), pm=p10(pick(p.m)*(p.flat?1:km));
+      P.push({st:p.st,n:p.n,u:p.u,per:p.per,q:p.q,pw:pw,pm:pm,W:p.q*pw,M:p.q*pm,spec:pick(p.spec)||'',furn:p.furn});
     });
-    if(s.opts.design) P.push({st:'o',n:'Дизайн-проект',u:'м²',per:'м²',q:s.area,pw:L.design,pm:0,W:s.area*L.design,M:0,design:true});
-    var works=0, mats=0, base=0, design=0;
+    if(s.opts.design){
+      var dspec=['Планировка, рабочие чертежи, подбор отделки. Мебель в проекте только из каталога Озона',
+                 'То же и 3D-визуализации всех комнат, ведомость материалов',
+                 'То же и авторский надзор раз в неделю, индивидуальные решения по свету'][I];
+      P.push({st:'o',n:'Дизайн-проект',u:'м²',per:'м²',q:s.area,pw:L.design,pm:0,W:s.area*L.design,M:0,design:true,spec:dspec});
+    }
+    var works=0, mats=0, base=0, design=0, resBase=0, kitBase=0;
     P.forEach(function(p){
       works+=p.W; mats+=p.M;
-      if(p.design) design+=p.W; else base+=p.W+p.M;
+      if(p.design) design+=p.W; else { base+=p.W+p.M; if(!p.furn){ resBase+=p.W+p.M; kitBase+=p.M; } }
     });
-    var fee=r100(base*FEE), kit=s.opts.kit?r100(mats*KIT):0, reserve=r100(base*RES);
+    var fee=r100(base*FEE), kit=s.opts.kit?r100(kitBase*KIT):0, reserve=r100(resBase*RES);
     var total=works+mats+fee+kit+reserve;
-    var weeks=(4+s.area/8)*L.k+T.wk+(s.opts.elec?1:0)+(s.opts.plumb?1:0)+(s.opts.floor?0.5:0);
+    var weeks=(4+s.area/8)*L.k+T.wk+(s.opts.elec?1:0)+(s.opts.plumb?1:0)+(s.opts.floor?0.5:0)+(s.furn==='custom'?1:0);
     return {P:P,works:works,mats:mats,fee:fee,kit:kit,reserve:reserve,total:total,studio:fee+kit+design,weeks:Math.round(weeks)};
   }
 
   function posRow(p){
-    var u = p.pm ? 'работа '+n(p.pw)+' ₽ · материалы '+n(p.pm)+' ₽ за '+p.per : n(p.pw)+' ₽ за '+p.per;
-    return '<tr><td>'+p.n+'<small>'+u+'</small></td><td class="num">'+n(p.q)+' '+p.u+'</td><td class="num">'+n(p.W)+'</td><td class="num">'+(p.M?n(p.M):'<span class="dash">—</span>')+'</td><td class="num">'+n(p.W+p.M)+'</td></tr>';
+    var u;
+    if(p.pm && p.pw) u='работа '+n(p.pw)+' ₽ · материалы '+n(p.pm)+' ₽ за '+p.per;
+    else if(p.pm) u='материалы '+n(p.pm)+' ₽ за '+p.per;
+    else u=n(p.pw)+' ₽ за '+p.per;
+    var sp = p.spec ? p.spec+'<br>' : '';
+    return '<tr><td>'+p.n+'<small>'+sp+u+'</small></td><td class="num">'+n(p.q)+' '+p.u+'</td><td class="num">'+(p.W?n(p.W):'<span class="dash">—</span>')+'</td><td class="num">'+(p.M?n(p.M):'<span class="dash">—</span>')+'</td><td class="num">'+n(p.W+p.M)+'</td></tr>';
   }
   function moneyRow(name,note,v){
     return '<tr><td>'+name+'<small>'+note+'</small></td><td></td><td class="num dash">—</td><td class="num dash">—</td><td class="num">'+n(v)+'</td></tr>';
@@ -966,13 +1050,14 @@ footer{background:var(--band);padding-block:36px}
     $('#m-sum').textContent = rub(c.mats);
     $('#s-sum').textContent = rub(c.studio);
 
-    var st={b:{W:0,M:0,names:[]},f:{W:0,M:0,names:[]},o:{W:0,M:0,names:[]}};
+    var st={b:{W:0,M:0,names:[]},f:{W:0,M:0,names:[]},o:{W:0,M:0,names:[]},m:{W:0,M:0,names:[]}};
     c.P.forEach(function(p){ st[p.st].W+=p.W; st[p.st].M+=p.M; st[p.st].names.push(p.n); });
     var seg=[
       {k:'b', n:STAGE.b, note:'работы '+rub(st.b.W)+' · материалы '+rub(st.b.M), v:st.b.W+st.b.M},
       {k:'f', n:STAGE.f, note:'работы '+rub(st.f.W)+' · материалы '+rub(st.f.M), v:st.f.W+st.f.M}
     ];
     if(st.o.names.length) seg.push({k:'o', n:STAGE.o, note:st.o.names.join(', '), v:st.o.W+st.o.M});
+    if(st.m.names.length) seg.push({k:'m', n:STAGE.m, note:st.m.names.join(', ')+', с изготовлением и монтажом', v:st.m.W+st.m.M});
     seg.push({k:'g', n:'Вознаграждение студии', note:'ведение объекта, '+Math.round(FEE*100)+'% от работ и материалов'+(c.kit?', комплектация '+Math.round(KIT*100)+'% от материалов':''), v:c.fee+c.kit});
     seg.push({k:'r', n:'Резерв на скрытые работы', note:Math.round(RES*100)+'% от работ и материалов', v:c.reserve});
 
@@ -982,7 +1067,7 @@ footer{background:var(--band);padding-block:36px}
     }).join('') + '<div class="row sum"><span></span><div class="nm">Итого</div><div class="v">'+rub(c.total)+'</div><div class="pc">100%</div></div>';
 
     var html='';
-    ['b','f','o'].forEach(function(k){
+    ['b','f','o','m'].forEach(function(k){
       var list=c.P.filter(function(p){return p.st===k;});
       if(!list.length) return;
       html+='<tr class="grp"><td colspan="5">'+STAGE[k]+'</td></tr>'+list.map(posRow).join('');
@@ -995,6 +1080,7 @@ footer{background:var(--band);padding-block:36px}
     $('#est').innerHTML = html;
     $('#est-f').innerHTML = '<tr><td colspan="2">Итого по смете</td><td class="num">'+n(c.works)+'</td><td class="num">'+n(c.mats)+'</td><td class="num">'+n(c.total)+'</td></tr>';
 
+    $('#furn-note').textContent = FURN[s.furn].note;
     $('#f-type').value = s.type;
     $('#f-area').value = s.area;
     renderPay(c, s);
@@ -1079,13 +1165,13 @@ footer{background:var(--band);padding-block:36px}
     if(selVal('f-replan')) L.push('Перепланировка: '+selVal('f-replan'));
     var note=$('#f-note').value.trim(); if(note) L.push('Комментарий: '+note);
     if($('#f-attach').checked){
-      var st={b:0,f:0,o:0};
+      var st={b:0,f:0,o:0,m:0};
       c.P.forEach(function(p){ st[p.st]+=p.W+p.M; });
       var on=OPT.filter(function(o){return s.opts[o.id];}).map(function(o){return o.n;});
       L.push('');
-      L.push('Расчёт с сайта: '+TY[s.type].n+', '+s.area+' м², '+LV[s.level].n);
+      L.push('Расчёт с сайта: '+TY[s.type].n+', '+s.area+' м², '+LV[s.level].n+', мебель: '+FURN[s.furn].n);
       L.push('Итого ≈ '+rub(c.total)+' ('+rub(c.total/s.area)+'/м²), срок ≈ '+c.weeks+' '+pl(c.weeks,'неделя','недели','недель'));
-      L.push('Черновой этап: '+rub(st.b)+'; чистовой этап: '+rub(st.f)+(st.o?'; дизайн и допработы: '+rub(st.o):''));
+      L.push('Черновой этап: '+rub(st.b)+'; чистовой этап: '+rub(st.f)+(st.o?'; дизайн и допработы: '+rub(st.o):'')+(st.m?'; мебель на заказ: '+rub(st.m):''));
       L.push('Ведение объекта: '+rub(c.fee)+(c.kit?'; комплектация: '+rub(c.kit):'')+'; резерв: '+rub(c.reserve));
       L.push('Опции: '+(on.length?on.join(', '):'нет'));
     }
@@ -1169,5 +1255,6 @@ footer{background:var(--band);padding-block:36px}
 })();
 
 </script>
+
 
 </body></html>
